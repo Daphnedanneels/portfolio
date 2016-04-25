@@ -2,12 +2,15 @@
 
 require WWW_ROOT.'dao'.DS.'PercelenDAO.php';
 require WWW_ROOT.'dao'.DS.'MoestuinDAO.php';
+require WWW_ROOT.'dao'.DS.'MoestuinenUsersDAO.php';
 
 $app->get('/api/moestuinen', function($request, $response, $args){
   $moestuinDAO = new MoestuinDAO();
 
   //hier haal je de parameter ?user_id=20 op
   $params = $request->getQueryParams();
+
+  // var_dump($params['user_id']);
 
   if (!empty($params['user_id'])){
     $moestuinen = $moestuinDAO->selectMoestuinenByUser($params['user_id']);
@@ -38,7 +41,11 @@ $app->get('/api/moestuinen/{id}', function($request, $response, $args){
   $percelenDAO = new PercelenDAO();
   $percelen = $percelenDAO->selectPercelenByMoestuinId($moestuin['id']);
 
+  $moestuinUsersDAO = new MoestuinenUsersDAO();
+  $moestuinUsers = $moestuinUsersDAO->selectAllUsersByMoestuinId($args['id']);
+
   $moestuin['percelen'] = $percelen;
+  $moestuin['users'] = $moestuinUsers;
 
   $response->getBody()->write(json_encode($moestuin));
   return $response->withHeader('Content-Type','application/json');

@@ -34,7 +34,7 @@ export default class Home extends Component{
   renderTuinen(){
     let {moestuinen, moestuinenFetched} = this.state;
     if(moestuinenFetched){
-      return moestuinen.map(moestuin => <MoestuinItem key={moestuin.id} {...moestuin} />);
+      return moestuinen.map(moestuin => <MoestuinItem key={moestuin.moestuinen_id} {...moestuin} />);
     }
   }
 

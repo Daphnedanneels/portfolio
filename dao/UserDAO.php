@@ -19,6 +19,10 @@ class UserDAO extends DAO {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+
+
+
+
   public function searchUsers($search){
     $sql = "SELECT `voornaam`, `achternaam`, `foto`, `id` FROM `mst_users`
             WHERE `voornaam` LIKE :voornaam OR `achternaam` LIKE :achternaam

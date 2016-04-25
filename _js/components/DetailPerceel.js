@@ -24,15 +24,12 @@ export default class DetailPerceel extends Component{
 
   verwijderHandler(e){
     e.preventDefault();
-    console.log("verwijda");
-
-
-
+    this.props.deletePlant(this.props.selectedPlant);
   }
 
   render(){
 
-    console.log(this.props.selectedPlant);
+    // console.log(this.props.selectedPlant);
 
     let {foto, plant_naam,percelen_id} = this.props.selectedPlant;
 

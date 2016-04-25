@@ -12,11 +12,11 @@ export default class Moestuinitem extends Component{
 
   render(){
 
-    let {id, naam, foto} = this.props;
+    let {moestuinen_id, naam, foto} = this.props;
 
     return (
       <li className="moestuinitem">
-        <Link to={`detail/${id}`} className="moestuinhover">
+        <Link to={`detail/${moestuinen_id}`} className="moestuinhover">
           <div className="blackoverlay">
             <button className="detailbutton" type=""></button>
           </div>

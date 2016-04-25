@@ -27,7 +27,7 @@ class PercelenDAO extends DAO {
   }
 
 
-  public function updatePlantBijPerceel($data){
+  public function insertPlantBijPerceel($data){
      $errors = $this->getValidationErrors($data);
       if(empty($errors)) {
         $sql = "UPDATE `mst_percelen` SET `plant_id`= :plant_id , `status`= :status WHERE id = :perceel_id";
@@ -37,6 +37,21 @@ class PercelenDAO extends DAO {
         $stmt->bindValue(':status', 1);
         if ($stmt->execute()){
           return $this->selectPercelenByIdWithPlant($data['perceel_id']);
+        }
+      }
+      return false;
+  }
+
+  public function verwijderPlantBijPerceel($data){
+     $errors = $this->getValidationErrors2($data);
+      if(empty($errors)) {
+        $sql = "UPDATE `mst_percelen` SET `plant_id`= :plant_id , `status`= :status WHERE id = :perceel_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':plant_id', 0);
+        $stmt->bindValue(':perceel_id', $data['perceel_id']);
+        $stmt->bindValue(':status', 0);
+        if ($stmt->execute()){
+          return $this->selectPercelenById($data['perceel_id']);
         }
       }
       return false;
@@ -65,5 +80,15 @@ class PercelenDAO extends DAO {
     }
     return $errors;
   }
+
+   public function getValidationErrors2($data) {
+    $errors = array();
+    if(empty($data['perceel_id'])) {
+      $errors['perceel_id'] = 'Je bent je perceel id vergeten';
+    }
+    return $errors;
+  }
+
+
 }
 

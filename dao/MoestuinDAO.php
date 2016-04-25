@@ -3,9 +3,11 @@ require_once WWW_ROOT . 'dao' . DS . 'DAO.php';
 class MoestuinDAO extends DAO {
 
   public function selectMoestuinenByUser($user_id){
-    $sql = "SELECT * FROM `mst_moestuinen` WHERE `eigenaar` = :eigenaar";
+    // $sql = "SELECT * FROM `mst_moestuinen` WHERE `eigenaar` = :eigenaar";
+    $sql ="SELECT *,mst_moestuinen.id as moestuinen_id FROM mst_moestuinen LEFT JOIN mst_moestuinen_users on mst_moestuinen.id = mst_moestuinen_users.moestuin_id WHERE mst_moestuinen_users.user_id = :eigenaar OR mst_moestuinen.eigenaar = :eigenaar2";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':eigenaar', $user_id);
+    $stmt->bindValue(':eigenaar2', $user_id);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }

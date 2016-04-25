@@ -19,7 +19,7 @@ export const insertPercelen = data => {
 export const updatePercelen = data =>{
 
   let method = 'PUT';
-  let body = buildBody(data, ['perceel_id', 'plant_id']);
+  let body = buildBody(data, ['perceel_id', 'plant_id', 'action']);
   let headers = new Headers({'Content-Type': 'application/json'});
 
   return fetch(`${basename}/api/percelen`, {method, body, headers})

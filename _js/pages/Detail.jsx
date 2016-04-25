@@ -69,8 +69,6 @@ export default class Detail extends Component{
 
 
     //log van de props die in de state gestoken worden
-    console.log('insert',props);
-
     this.setState({selectedPerceel: props});
 
     //visible maken
@@ -95,13 +93,33 @@ export default class Detail extends Component{
 
 
   showStatus(props){
-
-    console.log('props:', props);
     this.setState({selectedPlant:props});
 
     let detailPerceelVenster = document.querySelector('.oogsttijdwrapper');
     detailPerceelVenster.style.display = 'flex';
   }
+
+  deletePlant(props){
+
+
+    let data = {
+      perceel_id: props.percelen_id,
+      action: 'delete'
+    };
+
+    updatePercelen(data)
+    .then(()=>{
+      this.closeItem('', 'oogsttijdwrapper');
+    })
+    .then(()=>{
+      this.fetchPercelen();
+    })
+    .catch(phpErrors =>{
+      this.setState({ errors: phpErrors});
+    });
+
+  }
+
 
   updatePerceel(data){
 
@@ -199,7 +217,7 @@ export default class Detail extends Component{
       <main className="mijnmoestuin">
         <section className="mijnmoetuinwrapper">
           <PlantenForm planten={this.state.planten} updatePerceel={(data)=>this.updatePerceel(data)} closeItem={(e, item)=>this.closeItem(e, item)} selectedPerceel={this.state.selectedPerceel} plantenFetched={this.state.plantenFetched}/>
-          <DetailPerceel closeItem={(e, item)=>this.closeItem(e, item)} selectedPlant={this.state.selectedPlant}/>
+          <DetailPerceel closeItem={(e, item)=>this.closeItem(e, item)} selectedPlant={this.state.selectedPlant} deletePlant={(props) => this.deletePlant(props)}/>
           <header className="moestuinenheader">
             <h2>Jonas' moestuin</h2>
           </header>

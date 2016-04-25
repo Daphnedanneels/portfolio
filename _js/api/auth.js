@@ -11,7 +11,7 @@ export const login = data => {
   let method = 'POST';
   let headers = new Headers({'Content-Type': 'application/json'});
 
-  return fetch(`${basename}api/auth`, {body, method, headers})
+  return fetch(`${basename}/api/auth`, {body, method, headers})
     .then(checkStatus)
     .then(({token}) => token);
 };

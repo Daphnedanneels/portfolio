@@ -42,11 +42,14 @@ $app->put($base, function($request, $response, $args){
   $PercelenDAO = new PercelenDAO();
   $data = $request->getParsedBody();
 
-  $updatedPerceel = $PercelenDAO->updatePlantBijPerceel($data);
 
-  // var_dump($data);
+  if ($data['action'] === "insert"){
+    $updatedPerceel = $PercelenDAO->insertPlantBijPerceel($data);
+  }
 
-  // var_dump($updatedPerceel);
+  if($data['action'] === "delete"){
+    $updatedPerceel = $PercelenDAO->verwijderPlantBijPerceel($data);
+  }
 
   if(empty($updatedPerceel)){
     $errors['errors'] = $PercelenDAO->getValidationErrors($data);
@@ -56,7 +59,6 @@ $app->put($base, function($request, $response, $args){
     $response->getBody()->write(json_encode($updatedPerceel));
     $response = $response->withStatus(201);
   }
-
 
   return $response->withHeader('Content-Type','application/json');
 });

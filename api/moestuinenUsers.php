@@ -43,3 +43,19 @@ $app->post($base, function($request, $response, $args){
   return $response->withHeader('Content-Type','application/json');
 
 });
+
+/*
+$app->get(`${base}/{id}`, function($request, $response, $args){
+
+  $moestuinenUsersDAO = new MoestuinenUsersDAO();
+  $moestuinUsers = $moestuinenUsersDAO->selectMoestuinenById($args['id']);
+
+
+  $moestuin['percelen'] = $percelen;
+
+  $response->getBody()->write(json_encode($moestuin));
+  return $response->withHeader('Content-Type','application/json');
+
+}*/
+
+
