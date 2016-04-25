@@ -1,0 +1,1197 @@
+@import 'reset';
+
+$groen: #66DB52;
+$grijs:#F7F7F7;
+$zwart: #3D3F40;
+$donkergrijs:#9A9A9A;
+$donkergroen:#59C046;
+$blauw: #32D6FF;
+$rood: #FF1A00;
+
+html{
+  font-size:62.5%;
+  color:$zwart;
+  background-color: white;
+}
+
+body{
+  font-family: 'Arvo', 'Helvetica' , 'Arial' ,serif;
+  font-size:1.5rem;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+}
+
+
+
+.topbar{
+  width:100%;
+  height:7rem;
+  background-color: $groen;
+  color:white;
+  display:flex;
+  align-items: center;
+  // box-shadow: 0px 5px 0px $donkergroen;
+}
+
+.logo{
+  margin-left: 3rem;
+  display:flex;
+  align-items: center;
+
+
+  span{
+    font-size:2rem;
+    margin-left: 2rem;
+    color:white;
+  }
+}
+
+.login{
+  position:absolute;
+  z-index:0;
+  top:0;
+  width:100%;
+  height:100vh;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logincontent{
+  width:40rem;
+  padding:5rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color:$grijs;
+}
+
+.logintitel{
+  font-size: 3rem;
+  display:flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.registreeroptie{
+  display:flex;
+  justify-content: center;
+  margin-top:3rem;
+
+  a{
+    color:$zwart;
+    text-decoration: none;
+    padding-bottom:0.5rem;
+    border-bottom:0.2rem solid $zwart;
+  }
+}
+
+.inlogformulier{
+  form{
+  display:flex;
+  width:35rem;
+  flex-direction:column;
+  }
+
+  label{
+    margin:1rem 0rem;
+  }
+
+  .loginwachtwoord{
+    margin-top: 3rem;
+  }
+
+  input{
+    height:4rem;
+  }
+
+  input[type="email"],input[type="password"]{
+    font-size: 1.5rem;
+    font-family: helvetica;
+    outline:none;
+    border:none;
+    padding-left:1rem;
+  }
+
+  .button{
+    margin-top:2rem;
+    height:5rem;
+  }
+}
+
+.button{
+  cursor:pointer;
+  background-color:$groen;
+  border:none;
+  display:inline-block;
+  font-size: 1.5rem;
+  color:white;
+  height:5rem;
+  font-family: 'Arvo', 'Helvetica' , 'Arial' ,serif;
+  transition:all ease 0.5s;
+}
+
+.button:hover{
+  background-color:$donkergroen;
+}
+
+.menu{
+  font-size: 2rem;
+  justify-content: space-between;
+
+  a{
+    text-decoration: none;
+  }
+}
+
+.navitem>a{
+  padding:1rem 1.5rem;
+  color:white;
+  background-color: $donkergroen;
+}
+.logout{
+
+  padding:1rem 1.5rem;
+  color:$zwart;
+  background-color: white;
+  margin-right:3rem;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+
+  &:hover{
+  color:white;
+  background-color: $donkergroen;
+
+  }
+}
+
+.breadcrumbwrapper{
+  // width:100%;
+  // background-color: blue;
+  margin-top: 2rem;
+}
+
+
+.breadcrumbwrapper{
+  color:$donkergrijs;
+  margin-left: 3rem;
+  display:flex;
+  align-items: center;
+  .breadcrumbitem{
+    text-decoration: none;
+    color:$donkergrijs;
+    padding-bottom:0.5rem;
+    transition:all ease 0.5s;
+    &:hover{
+      padding-bottom:0.2rem;
+      border-bottom:1px solid $donkergrijs;
+    }
+  }
+
+    p.breadcrumbitem:hover{
+      padding-bottom:0.5rem;
+      border-bottom: none;
+    }
+
+  ul{
+     display:flex;
+  }
+  li{
+    margin:0 0.3rem;
+  }
+
+  .previous{
+    background-color: $groen;
+    padding:1.5rem 2rem;
+    font-size:2rem;
+    color:white;
+    display:inline-block;
+    border-radius:4rem;
+    margin-right: 2rem;
+    text-decoration: none;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+  }
+}
+
+.moestuinen{
+  width:100%;
+  display:flex;
+  justify-content: center;
+  flex-direction:column;
+  align-items: center;
+
+}
+
+.moestuinenheader{
+  display:flex;
+  justify-content: center;
+
+  h2{
+  font-size: 3rem;
+  color:$donkergrijs;
+  margin:4rem;
+}
+}
+
+.moestuinoplijsting{
+  width:90rem;
+  padding:3rem;
+  background-color: $grijs;
+  // background-color: blue;
+  display:flex;
+  justify-content: flex-start;
+  flex-wrap:wrap;
+}
+
+.moestuinitem,.addmoestuin{
+  width:25rem;
+  height:20rem;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
+  margin:1.5rem;
+  position:relative;
+
+}
+
+.moestuinitem{
+  position:relative;
+
+  .moestuinhover{
+    // display:none;
+    transition: all ease 0.5s;
+  }
+
+  .detailbutton{
+    transition:all ease 0.5s;
+    // display:none;
+    position:absolute;
+    width:5rem;
+    height:5rem;
+    left:10rem;
+    top:5rem;
+    background-color: $groen;
+    border-radius:5rem;
+    border:none;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.2);
+    cursor:pointer;
+    outline:none;
+    background-image: url('/assets/icons/search.svg');
+    background-size:2rem 2rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index:5;
+  }
+
+  .blackoverlay{
+    transition:all ease 0.5s;
+    width:25rem;
+    height:15.2rem;
+    background-color: rgba(0,0,0,0.7);
+    position:absolute;
+    opacity:0;
+    top:0;
+  }
+
+  &:hover .blackoverlay{
+    opacity:1;
+  }
+
+
+  a{
+    color:$zwart;
+    text-decoration: none;
+    text-align: center
+  }
+
+  .moestuintitel{
+    margin:1.5rem;
+  }
+}
+
+.addmoestuin{
+  background-color: $groen;
+  transition:all ease 0.5s;
+  text-align: center;
+
+  a{
+    text-decoration: none;
+  }
+
+  &:hover{
+    background-color: $donkergroen;
+  }
+
+  .addicon{
+    font-size: 9rem;
+    // font-weight: bold;
+  }
+
+  .addicon,a{
+    color:white;
+  }
+}
+
+.account{
+display:flex;
+align-items: center;
+}
+
+.avatar>figure, .avatar{
+  display:flex;
+  align-items: center;
+  margin-right: 5rem;
+}
+.avatarimage{
+  border-radius: 5rem;
+  margin-right: 2rem;
+}
+
+.maakmoestuincontent{
+  width:96rem;
+  display:flex;
+  justify-content: center;
+}
+
+.maakmoestuin{
+  // margin-top: 3rem;
+  display:flex;
+  justify-content: center;
+}
+
+.maakmoestuinwrapper{
+  width:100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+}
+
+.moestuindimensies{
+ margin-top: 2rem;
+ display:flex;
+ justify-content: space-between;
+
+ div{
+  display:flex;
+  flex-direction:column;
+ }
+}
+
+.maakmoestuinform{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+
+  label{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  input[type="text"], input[type="number"]{
+    border:none;
+    height:4rem;
+    padding-left:2rem;
+    outline:none;
+    font-size:1.5rem;
+  }
+
+  h3{
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: bolder;
+  }
+}
+
+.moestuingegevenswrapper{
+  display:flex;
+  justify-content: space-between;
+  background-color: $grijs;
+
+  .moestuingegevenslinks,.moestuingegevensrechts{
+    width:50%;
+    padding:3rem;
+    // margin:0 1rem;
+  }
+
+  .moestuinnaamwrapper{
+    display:flex;
+    flex-direction:column;
+
+    input{
+      width:100%;
+    }
+  }
+}
+
+.moestuinvisualisatie{
+  margin-top: 3rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  background-color: $grijs;
+  padding-top: 3rem;
+  margin-bottom: 3rem;
+
+  .moestuinvisualistatietitel{
+    margin-left:2rem;
+    margin-bottom: -1rem;
+    align-self:flex-start;
+  }
+
+  .moestuinlijst{
+    display:flex;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    margin: 2rem;
+
+    li{
+    margin:1rem;
+    }
+  }
+}
+
+
+.maakmoestuin .eigenaarsoplijsting{
+  display:flex;
+  width:50rem;
+  flex-wrap: wrap;
+  li{
+    margin:1rem;
+  }
+}
+
+
+.eigenaarsoplijsting{
+
+  li{
+    display:flex;
+    align-items: center;
+    flex-direction:column;
+  }
+
+  p{
+    margin-top: 1rem;
+  }
+
+  img{
+    border-radius: 10rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.bold{
+  font-weight: bolder;
+}
+
+.eigenaarswrapper{
+  display:flex;
+  padding:3rem;
+  width:100%;
+  justify-content: space-between;
+  background-color: $grijs;
+}
+.addeigenaar{
+  width:40%;
+  display:flex;
+  flex-direction:column;
+}
+
+.addEigenaarAction{
+  position:relative;
+  width:100%;
+
+  input{
+    width:100%;
+    font-size:1.5rem;
+  }
+}
+
+.sendEmail{
+  position:absolute;
+  width:4rem;
+  height:4rem;
+  font-size: 3rem;
+  top:0;
+  right:0;
+  outline:none;
+}
+
+.submitMoestuin{
+  align-self:flex-end;
+  font-size: 2rem;
+  padding:1.5rem 3rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.moestuingegevensrechts{
+  // background-color: blue;
+  // display:flex;
+}
+
+.fileUpload, .avatarFileUpload{
+  background-color: $groen;
+  position:relative;
+  color:white;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+
+  &:hover{
+    cursor:pointer;
+  }
+}
+
+.plusUpload,.tekstUpload, .plusFileUpload, .tekstFileUpload{
+  position:absolute;
+}
+
+.plusUpload{
+  font-size: 10rem;
+  left:18rem;
+  top:3rem;
+}
+
+.tekstUpload{
+  left:15rem;
+  top:13rem;
+}
+
+.moestuinfile{
+  width:42rem;
+  height:20rem;
+  opacity:0;
+  &:hover{
+    cursor:pointer;
+  }
+}
+
+.registreerform{
+  h3{
+    font-size: 2rem;
+  }
+}
+
+.registreer{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+}
+
+.registreerwrapper{
+   background-color: $grijs;
+
+  padding:3rem;
+  width:50rem;
+  margin-bottom: 3rem;
+
+  .button{
+    align-self:flex-end;
+    padding:1.5rem 3rem;
+  }
+
+  .registreerform{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+  }
+
+  input[type="email"], input[type="text"], input[type="password"]{
+    height:4rem;
+    padding-left:2rem;
+    border:none;
+    outline:none;
+    font-size: 1.5rem;
+    width:40rem;
+  }
+}
+
+.voornaaminput, .achternaaminput, .emailinput, .passwordinput{
+  display:flex;
+  flex-direction:column;
+  margin:2rem 0rem;
+
+  label{
+    margin-bottom:1.5rem;
+  }
+}
+
+.persoonlijkeGegevens{
+  margin-bottom: 3rem;
+}
+
+.avatarFileUpload{
+  border-radius: 20rem;
+  width:20rem;
+  height:20rem;
+  margin-bottom: 3rem;
+
+  &:hover{
+    cursor:pointer;
+  }
+}
+
+.plusFileUpload{
+  left:7rem;
+  top:3rem;
+  font-size: 10rem;
+
+}
+
+.tekstFileUpload{
+  top:12rem;
+  width:15rem;
+  left:2.5rem;
+  line-height: 2rem;
+  text-align: center;
+}
+
+.avatarFile{
+  width:20rem;
+  height:20rem;
+  opacity:0;
+   &:hover{
+    cursor:pointer;
+  }
+}
+
+.mijnmoestuin{
+  display:flex;
+  justify-content: center;
+
+  .moestuinlijst{
+    display:flex;
+    justify-content: flex-start;
+    flex-wrap:wrap;  }
+}
+
+.mijntuinoverzicht{
+  display:flex;
+}
+
+.tuin{
+   background-color: $grijs;
+
+   padding:3rem;
+   display:flex;
+   justify-content: center;
+   margin-bottom: 3rem;
+}
+
+.perceel{
+  position:relative;
+  width:16.4rem;
+  margin:1rem;
+}
+
+.perceel:hover .dropdownform{
+  // border:2px solid $groen;
+  display:block;
+}
+
+.perceelhover{
+  display:block;
+  font-size: 10rem;
+  color:white;
+  left:5rem;
+  top:3rem;
+  position:absolute;
+}
+
+.mijnmoestuinwrapper{
+  display:flex;
+  justify-content: center;
+  background-color: red;
+}
+
+.dropdownformwrapper{
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,0.7);
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:100;
+  display:none;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdownform{
+  z-index:30;
+  position:relative;
+}
+
+.mijnmoestuin .addeigenaar .dropdownformUsers .dropdown{
+  width:24rem;
+}
+
+.dropdown{
+  background-color: $grijs;
+  width:98rem;
+  padding:1rem;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+  // height:57rem;
+  // overflow:scroll
+  display:flex;
+  flex-direction:column;
+
+  .buttonwrapper{
+    align-self:flex-end
+  }
+
+  .button{
+    padding:1.5rem 4rem;
+    font-size: 2rem;
+  }
+}
+
+.dropdowntop{
+  width:100%;
+  background-color: $groen;
+  text-align: center;
+  color:white;
+  font-size:2rem;
+  padding:3rem 0;
+  position: absolute;
+  top:0rem;
+  left:0rem;
+}
+
+.closeIcon{
+  text-decoration: none;
+  color:white;
+  font-size: 4rem;
+  transform:rotate(45deg);
+  position:absolute;
+  right:2rem;
+  top:2rem;
+}
+
+.groentenlijst{
+  display:flex;
+  flex-wrap:wrap;
+  margin-top: 7rem;
+}
+
+.groente{
+  border-bottom:3px solid rgba(0,0,0,0.1);
+  margin:1rem 1rem;
+  width:30rem;
+  input[type="radio"]{
+    display:none;
+  }
+
+  .labelChecked{
+    background-color: $groen;
+    color:white;
+  }
+
+  label{
+    display:flex;
+    align-items: center;
+    font-size: 2rem;
+    z-index: 102;
+    span{
+      margin-left:2rem;
+    }
+    span::first-letter{
+      text-transform: uppercase;
+    }
+  }
+
+}
+.groente:first-child{
+  // margin-top: 7rem;
+}
+.groente:last-child{
+  border-bottom:none;
+}
+
+.water{
+  height:1rem;
+  background-color:white;
+  margin-top: -0.5rem;
+  position:relative;
+  width:16.4rem;
+
+  .waternu{
+    position:absolute;
+    width:10rem;
+    height:1rem;
+    background-color: $blauw;
+  }
+
+  .watertotaal{
+    position:absolute;
+    width:100%;
+    height:1rem;
+    background-color: rgba(50, 214, 255,0.5);
+  }
+
+  .watericon{
+    position:absolute;
+    z-index:12;
+    width:2rem;
+    height:2rem;
+    margin-top: -5rem;
+    left:0.5rem;
+    top:2rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image:url('/assets/icons/water.svg');
+  }
+}
+
+.oogsttijdwrapper{
+width:100%;
+height:100%;
+position:fixed;
+z-index:30;
+left:0;
+top:0;
+background-color: rgba(0,0,0,0.7);
+display:none;
+justify-content: center;
+align-items: center;
+}
+
+.oogsttijd{
+  width:40rem;
+  height:46rem;
+  background-color:$grijs;
+  box-shadow: 0px 5px 7px rgba(0,0,0,0.2);
+  display:flex;
+  position:relative;
+  z-index:40;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  color:$donkergrijs;
+  z-index:10;
+
+  .closeIcon{
+    color:$donkergrijs;
+  }
+
+  .dagen{
+    font-size: 3rem;
+    font-weight: bolder;
+    margin-top: 1rem;
+
+  }
+}
+
+.oogstijdtitlewrapper{
+  display:flex;
+  align-items: center;
+
+  p{
+    font-size: 2rem;
+  }
+
+  p::first-letter{
+    text-transform: uppercase;
+  }
+}
+
+
+.oogsttijddata{
+
+  // background-color: green;
+  width:90%;
+
+  h3{
+    font-size: 2rem;
+    margin-bottom: -2rem;
+  }
+
+  .watericon, .oogsticon{
+    height:2rem;
+    margin-top: 2rem;
+    padding-left: 3rem;
+    margin-top: 4rem;
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-image: url('/assets/icons/water.svg');
+  }
+
+  .oogsticon{
+    background-image: url('/assets/icons/blaadje.svg');
+  }
+
+
+  .status{
+    position:relative;
+    margin-top: 1rem;
+  }
+
+  .watertotaal,.oogsttotaal{
+    width:100%;
+    height:1rem;
+    background-color: rgba(50, 214, 255,0.5);
+    position:absolute;
+    margin-bottom: 2rem;
+  }
+
+  .oogsttotaal{
+    background-color:rgba(102, 219, 82,0.5);
+  }
+
+  .watertijd,.oogsttijd{
+  font-weight: bolder;
+  }
+
+  .waternu,.oogstnu{
+    width:70%;
+    height:1rem;
+    background-color:$blauw;
+    position:absolute;
+    top:0;
+  }
+
+  .oogstnu{
+    background-color: $groen;
+  }
+
+}
+
+.mijnmoestuingeigenaars{
+
+  padding:3rem;
+  background-color: $grijs;
+  margin-left: 2rem;
+  width:30rem;
+  margin-bottom: 3rem;
+
+  h3{
+    font-size: 2rem;
+  }
+}
+.mijnmoestuineigenaars{
+  margin-top: 3rem;
+  display:flex;
+  justify-content: flex-start;
+  position:relative;
+
+}
+
+.removeuser{
+ background-color: $rood;
+ width:4rem;
+ height:4rem;
+ position:absolute;
+ text-decoration: none;
+ color:white;
+ font-size: 3rem;
+ font-weight: bolder;
+ display:flex;
+ justify-content: center;
+ align-items: center;
+ border-radius: 4rem;
+ right:0rem;
+ top:0rem;
+ box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+
+
+.mijnmoestuineigenaarsItem{
+
+  width:10rem;
+  margin-right: 3rem;
+  position:relative;
+
+  figure{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+  }
+
+  figcaption{
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  img{
+    border-radius: 10rem;
+  }
+}
+
+.eigenaarwrapper{
+  margin-top: 4rem;
+}
+
+.mijnmoestuin .addeigenaar{
+ width:100%;
+
+ h3{
+  margin-bottom: 2rem;
+ }
+ label{
+  margin-bottom: 1rem;
+ }
+
+ input[type="text"]{
+  height:4rem;
+  border:none;
+  outline:none;
+  padding-left:1rem;
+ }
+
+ .addEigenaarAction:focus > .dropdownformUsers{
+  // display:block
+}
+
+
+
+}
+
+.dropdownformUsers{
+  display:none;
+  position:absolute;
+  z-index:20;
+
+  .dropdown{
+    height:28rem;
+    width:24rem;
+    background-color: white;
+    box-shadow: none;
+    overflow:scroll;
+  }
+}
+
+
+.addeigenaar .dropdownformUsers{
+  display:none;
+
+  .dropdown{
+    width:36rem;
+    height:20rem;
+  }
+
+  label{
+    width:100%;
+
+  }
+}
+
+.userinlijst{
+  display:flex;
+  border-bottom:3px solid rgba(0,0,0,0.1);
+  margin:1rem 0;
+  // padding:1rem 0;
+
+  label{
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    // font-size: 2rem;
+    padding:1rem;
+    // padding-left: 1rem;
+
+
+    &:hover{
+      background-color: $donkergrijs;
+    }
+
+    span{
+       margin-left: 2rem;
+       width:13rem;
+       line-height: 1.7rem;
+    }
+  }
+
+  input[type="radio"]{
+  display:none;
+  }
+
+  input[type="radio"]:checked + label{
+    background-color: $donkergrijs;
+    color:white;
+  }
+
+  img{
+    border-radius:7rem;
+  }
+
+}
+
+.plot{
+  // text-decoration: none;
+  color: $donkergrijs;
+  // width:90%;
+  cursor:pointer;
+}
+
+
+
+.plantbuttons{
+margin-top: 4rem;
+display:flex;
+width:90%;
+justify-content: space-between;
+
+  .button{
+  height:auto;
+  padding:2rem;
+  text-decoration: none;
+  }
+
+  .waterbutton{
+    background-color: $blauw;
+  }
+
+  .verwijderbutton{
+    background-color: $rood;
+  }
+}
+
+.error{
+  margin-top: 1rem;
+  color:$rood;
+}
+
+.errorItem{
+  width:100%;
+  display:flex;
+  justify-content: center;
+  margin:2rem 0rem;
+  p{
+    display:inline-block;
+  }
+}
+
+.errortop{
+  margin-bottom: 2rem;
+}
+
+.nousersinlijst{
+
+  border-bottom: none;
+  display:flex;
+  justify-content: center;
+
+  p{
+    text-align: center
+  }
+}
+
+.hide{
+  display:none;
+}
+
+
+
+
+
+
+

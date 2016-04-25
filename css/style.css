@@ -1,0 +1,1448 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+main {
+  display: block;
+}
+
+html {
+  font-size: 62.5%;
+  color: #3D3F40;
+  background-color: white;
+}
+
+body {
+  font-family: 'Arvo', 'Helvetica' , 'Arial' ,serif;
+  font-size: 1.5rem;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.topbar {
+  width: 100%;
+  height: 7rem;
+  background-color: #66DB52;
+  color: white;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logo {
+  margin-left: 3rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logo span {
+  font-size: 2rem;
+  margin-left: 2rem;
+  color: white;
+}
+
+.login {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logincontent {
+  width: 40rem;
+  padding: 5rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #F7F7F7;
+}
+
+.logintitel {
+  font-size: 3rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.registreeroptie {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 3rem;
+}
+
+.registreeroptie a {
+  color: #3D3F40;
+  text-decoration: none;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.2rem solid #3D3F40;
+}
+
+.inlogformulier form {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 35rem;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.inlogformulier label {
+  margin: 1rem 0rem;
+}
+
+.inlogformulier .loginwachtwoord {
+  margin-top: 3rem;
+}
+
+.inlogformulier input {
+  height: 4rem;
+}
+
+.inlogformulier input[type="email"], .inlogformulier input[type="password"] {
+  font-size: 1.5rem;
+  font-family: helvetica;
+  outline: none;
+  border: none;
+  padding-left: 1rem;
+}
+
+.inlogformulier .button {
+  margin-top: 2rem;
+  height: 5rem;
+}
+
+.button {
+  cursor: pointer;
+  background-color: #66DB52;
+  border: none;
+  display: inline-block;
+  font-size: 1.5rem;
+  color: white;
+  height: 5rem;
+  font-family: 'Arvo', 'Helvetica' , 'Arial' ,serif;
+  transition: all ease 0.5s;
+}
+
+.button:hover {
+  background-color: #59C046;
+}
+
+.menu {
+  font-size: 2rem;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.menu a {
+  text-decoration: none;
+}
+
+.navitem > a {
+  padding: 1rem 1.5rem;
+  color: white;
+  background-color: #59C046;
+}
+
+.logout {
+  padding: 1rem 1.5rem;
+  color: #3D3F40;
+  background-color: white;
+  margin-right: 3rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logout:hover {
+  color: white;
+  background-color: #59C046;
+}
+
+.breadcrumbwrapper {
+  margin-top: 2rem;
+}
+
+.breadcrumbwrapper {
+  color: #9A9A9A;
+  margin-left: 3rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.breadcrumbwrapper .breadcrumbitem {
+  text-decoration: none;
+  color: #9A9A9A;
+  padding-bottom: 0.5rem;
+  transition: all ease 0.5s;
+}
+
+.breadcrumbwrapper .breadcrumbitem:hover {
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #9A9A9A;
+}
+
+.breadcrumbwrapper p.breadcrumbitem:hover {
+  padding-bottom: 0.5rem;
+  border-bottom: none;
+}
+
+.breadcrumbwrapper ul {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.breadcrumbwrapper li {
+  margin: 0 0.3rem;
+}
+
+.breadcrumbwrapper .previous {
+  background-color: #66DB52;
+  padding: 1.5rem 2rem;
+  font-size: 2rem;
+  color: white;
+  display: inline-block;
+  border-radius: 4rem;
+  margin-right: 2rem;
+  text-decoration: none;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.moestuinen {
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.moestuinenheader {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.moestuinenheader h2 {
+  font-size: 3rem;
+  color: #9A9A9A;
+  margin: 4rem;
+}
+
+.moestuinoplijsting {
+  width: 90rem;
+  padding: 3rem;
+  background-color: #F7F7F7;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.moestuinitem, .addmoestuin {
+  width: 25rem;
+  height: 20rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+  margin: 1.5rem;
+  position: relative;
+}
+
+.moestuinitem {
+  position: relative;
+}
+
+.moestuinitem .moestuinhover {
+  transition: all ease 0.5s;
+}
+
+.moestuinitem .detailbutton {
+  transition: all ease 0.5s;
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  left: 10rem;
+  top: 5rem;
+  background-color: #66DB52;
+  border-radius: 5rem;
+  border: none;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  outline: none;
+  background-image: url("/assets/icons/search.svg");
+  background-size: 2rem 2rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 5;
+}
+
+.moestuinitem .blackoverlay {
+  transition: all ease 0.5s;
+  width: 25rem;
+  height: 15.2rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  opacity: 0;
+  top: 0;
+}
+
+.moestuinitem:hover .blackoverlay {
+  opacity: 1;
+}
+
+.moestuinitem a {
+  color: #3D3F40;
+  text-decoration: none;
+  text-align: center;
+}
+
+.moestuinitem .moestuintitel {
+  margin: 1.5rem;
+}
+
+.addmoestuin {
+  background-color: #66DB52;
+  transition: all ease 0.5s;
+  text-align: center;
+}
+
+.addmoestuin a {
+  text-decoration: none;
+}
+
+.addmoestuin:hover {
+  background-color: #59C046;
+}
+
+.addmoestuin .addicon {
+  font-size: 9rem;
+}
+
+.addmoestuin .addicon, .addmoestuin a {
+  color: white;
+}
+
+.account {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.avatar > figure, .avatar {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 5rem;
+}
+
+.avatarimage {
+  border-radius: 5rem;
+  margin-right: 2rem;
+}
+
+.maakmoestuincontent {
+  width: 96rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.maakmoestuin {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.maakmoestuinwrapper {
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.moestuindimensies {
+  margin-top: 2rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.moestuindimensies div {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.maakmoestuinform {
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.maakmoestuinform label {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.maakmoestuinform input[type="text"], .maakmoestuinform input[type="number"] {
+  border: none;
+  height: 4rem;
+  padding-left: 2rem;
+  outline: none;
+  font-size: 1.5rem;
+}
+
+.maakmoestuinform h3 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: bolder;
+}
+
+.moestuingegevenswrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #F7F7F7;
+}
+
+.moestuingegevenswrapper .moestuingegevenslinks, .moestuingegevenswrapper .moestuingegevensrechts {
+  width: 50%;
+  padding: 3rem;
+}
+
+.moestuingegevenswrapper .moestuinnaamwrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.moestuingegevenswrapper .moestuinnaamwrapper input {
+  width: 100%;
+}
+
+.moestuinvisualisatie {
+  margin-top: 3rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #F7F7F7;
+  padding-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.moestuinvisualisatie .moestuinvisualistatietitel {
+  margin-left: 2rem;
+  margin-bottom: -1rem;
+  -webkit-align-self: flex-start;
+      -ms-flex-item-align: start;
+          align-self: flex-start;
+}
+
+.moestuinvisualisatie .moestuinlijst {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin: 2rem;
+}
+
+.moestuinvisualisatie .moestuinlijst li {
+  margin: 1rem;
+}
+
+.maakmoestuin .eigenaarsoplijsting {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50rem;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.maakmoestuin .eigenaarsoplijsting li {
+  margin: 1rem;
+}
+
+.eigenaarsoplijsting li {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.eigenaarsoplijsting p {
+  margin-top: 1rem;
+}
+
+.eigenaarsoplijsting img {
+  border-radius: 10rem;
+  margin-bottom: 1rem;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+.eigenaarswrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 3rem;
+  width: 100%;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #F7F7F7;
+}
+
+.addeigenaar {
+  width: 40%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.addEigenaarAction {
+  position: relative;
+  width: 100%;
+}
+
+.addEigenaarAction input {
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.sendEmail {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  font-size: 3rem;
+  top: 0;
+  right: 0;
+  outline: none;
+}
+
+.submitMoestuin {
+  -webkit-align-self: flex-end;
+      -ms-flex-item-align: end;
+          align-self: flex-end;
+  font-size: 2rem;
+  padding: 1.5rem 3rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.fileUpload, .avatarFileUpload {
+  background-color: #66DB52;
+  position: relative;
+  color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.fileUpload:hover, .avatarFileUpload:hover {
+  cursor: pointer;
+}
+
+.plusUpload, .tekstUpload, .plusFileUpload, .tekstFileUpload {
+  position: absolute;
+}
+
+.plusUpload {
+  font-size: 10rem;
+  left: 18rem;
+  top: 3rem;
+}
+
+.tekstUpload {
+  left: 15rem;
+  top: 13rem;
+}
+
+.moestuinfile {
+  width: 42rem;
+  height: 20rem;
+  opacity: 0;
+}
+
+.moestuinfile:hover {
+  cursor: pointer;
+}
+
+.registreerform h3 {
+  font-size: 2rem;
+}
+
+.registreer {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.registreerwrapper {
+  background-color: #F7F7F7;
+  padding: 3rem;
+  width: 50rem;
+  margin-bottom: 3rem;
+}
+
+.registreerwrapper .button {
+  -webkit-align-self: flex-end;
+      -ms-flex-item-align: end;
+          align-self: flex-end;
+  padding: 1.5rem 3rem;
+}
+
+.registreerwrapper .registreerform {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.registreerwrapper input[type="email"], .registreerwrapper input[type="text"], .registreerwrapper input[type="password"] {
+  height: 4rem;
+  padding-left: 2rem;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  width: 40rem;
+}
+
+.voornaaminput, .achternaaminput, .emailinput, .passwordinput {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 2rem 0rem;
+}
+
+.voornaaminput label, .achternaaminput label, .emailinput label, .passwordinput label {
+  margin-bottom: 1.5rem;
+}
+
+.persoonlijkeGegevens {
+  margin-bottom: 3rem;
+}
+
+.avatarFileUpload {
+  border-radius: 20rem;
+  width: 20rem;
+  height: 20rem;
+  margin-bottom: 3rem;
+}
+
+.avatarFileUpload:hover {
+  cursor: pointer;
+}
+
+.plusFileUpload {
+  left: 7rem;
+  top: 3rem;
+  font-size: 10rem;
+}
+
+.tekstFileUpload {
+  top: 12rem;
+  width: 15rem;
+  left: 2.5rem;
+  line-height: 2rem;
+  text-align: center;
+}
+
+.avatarFile {
+  width: 20rem;
+  height: 20rem;
+  opacity: 0;
+}
+
+.avatarFile:hover {
+  cursor: pointer;
+}
+
+.mijnmoestuin {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mijnmoestuin .moestuinlijst {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.mijntuinoverzicht {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.tuin {
+  background-color: #F7F7F7;
+  padding: 3rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.perceel {
+  position: relative;
+  width: 16.4rem;
+  margin: 1rem;
+}
+
+.perceel:hover .dropdownform {
+  display: block;
+}
+
+.perceelhover {
+  display: block;
+  font-size: 10rem;
+  color: white;
+  left: 5rem;
+  top: 3rem;
+  position: absolute;
+}
+
+.mijnmoestuinwrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: red;
+}
+
+.dropdownformwrapper {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: none;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center;
+}
+
+.dropdownform {
+  z-index: 30;
+  position: relative;
+}
+
+.mijnmoestuin .addeigenaar .dropdownformUsers .dropdown {
+  width: 24rem;
+}
+
+.dropdown {
+  background-color: #F7F7F7;
+  width: 98rem;
+  padding: 1rem;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.dropdown .buttonwrapper {
+  -webkit-align-self: flex-end;
+      -ms-flex-item-align: end;
+          align-self: flex-end;
+}
+
+.dropdown .button {
+  padding: 1.5rem 4rem;
+  font-size: 2rem;
+}
+
+.dropdowntop {
+  width: 100%;
+  background-color: #66DB52;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  padding: 3rem 0;
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+}
+
+.closeIcon {
+  text-decoration: none;
+  color: white;
+  font-size: 4rem;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+
+.groentenlijst {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin-top: 7rem;
+}
+
+.groente {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  margin: 1rem 1rem;
+  width: 30rem;
+}
+
+.groente input[type="radio"] {
+  display: none;
+}
+
+.groente .labelChecked {
+  background-color: #66DB52;
+  color: white;
+}
+
+.groente label {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 2rem;
+  z-index: 102;
+}
+
+.groente label span {
+  margin-left: 2rem;
+}
+
+.groente label span::first-letter {
+  text-transform: uppercase;
+}
+
+.groente:last-child {
+  border-bottom: none;
+}
+
+.water {
+  height: 1rem;
+  background-color: white;
+  margin-top: -0.5rem;
+  position: relative;
+  width: 16.4rem;
+}
+
+.water .waternu {
+  position: absolute;
+  width: 10rem;
+  height: 1rem;
+  background-color: #32D6FF;
+}
+
+.water .watertotaal {
+  position: absolute;
+  width: 100%;
+  height: 1rem;
+  background-color: rgba(50, 214, 255, 0.5);
+}
+
+.water .watericon {
+  position: absolute;
+  z-index: 12;
+  width: 2rem;
+  height: 2rem;
+  margin-top: -5rem;
+  left: 0.5rem;
+  top: 2rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url("/assets/icons/water.svg");
+}
+
+.oogsttijdwrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center;
+}
+
+.oogsttijd {
+  width: 40rem;
+  height: 46rem;
+  background-color: #F7F7F7;
+  box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.2);
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  z-index: 40;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #9A9A9A;
+  z-index: 10;
+}
+
+.oogsttijd .closeIcon {
+  color: #9A9A9A;
+}
+
+.oogsttijd .dagen {
+  font-size: 3rem;
+  font-weight: bolder;
+  margin-top: 1rem;
+}
+
+.oogstijdtitlewrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.oogstijdtitlewrapper p {
+  font-size: 2rem;
+}
+
+.oogstijdtitlewrapper p::first-letter {
+  text-transform: uppercase;
+}
+
+.oogsttijddata {
+  width: 90%;
+}
+
+.oogsttijddata h3 {
+  font-size: 2rem;
+  margin-bottom: -2rem;
+}
+
+.oogsttijddata .watericon, .oogsttijddata .oogsticon {
+  height: 2rem;
+  margin-top: 2rem;
+  padding-left: 3rem;
+  margin-top: 4rem;
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-image: url("/assets/icons/water.svg");
+}
+
+.oogsttijddata .oogsticon {
+  background-image: url("/assets/icons/blaadje.svg");
+}
+
+.oogsttijddata .status {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.oogsttijddata .watertotaal, .oogsttijddata .oogsttotaal {
+  width: 100%;
+  height: 1rem;
+  background-color: rgba(50, 214, 255, 0.5);
+  position: absolute;
+  margin-bottom: 2rem;
+}
+
+.oogsttijddata .oogsttotaal {
+  background-color: rgba(102, 219, 82, 0.5);
+}
+
+.oogsttijddata .watertijd, .oogsttijddata .oogsttijd {
+  font-weight: bolder;
+}
+
+.oogsttijddata .waternu, .oogsttijddata .oogstnu {
+  width: 70%;
+  height: 1rem;
+  background-color: #32D6FF;
+  position: absolute;
+  top: 0;
+}
+
+.oogsttijddata .oogstnu {
+  background-color: #66DB52;
+}
+
+.mijnmoestuingeigenaars {
+  padding: 3rem;
+  background-color: #F7F7F7;
+  margin-left: 2rem;
+  width: 30rem;
+  margin-bottom: 3rem;
+}
+
+.mijnmoestuingeigenaars h3 {
+  font-size: 2rem;
+}
+
+.mijnmoestuineigenaars {
+  margin-top: 3rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  position: relative;
+}
+
+.removeuser {
+  background-color: #FF1A00;
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  text-decoration: none;
+  color: white;
+  font-size: 3rem;
+  font-weight: bolder;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 4rem;
+  right: 0rem;
+  top: 0rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.mijnmoestuineigenaarsItem {
+  width: 10rem;
+  margin-right: 3rem;
+  position: relative;
+}
+
+.mijnmoestuineigenaarsItem figure {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.mijnmoestuineigenaarsItem figcaption {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.mijnmoestuineigenaarsItem img {
+  border-radius: 10rem;
+}
+
+.eigenaarwrapper {
+  margin-top: 4rem;
+}
+
+.mijnmoestuin .addeigenaar {
+  width: 100%;
+}
+
+.mijnmoestuin .addeigenaar h3 {
+  margin-bottom: 2rem;
+}
+
+.mijnmoestuin .addeigenaar label {
+  margin-bottom: 1rem;
+}
+
+.mijnmoestuin .addeigenaar input[type="text"] {
+  height: 4rem;
+  border: none;
+  outline: none;
+  padding-left: 1rem;
+}
+
+.dropdownformUsers {
+  display: none;
+  position: absolute;
+  z-index: 20;
+}
+
+.dropdownformUsers .dropdown {
+  height: 28rem;
+  width: 24rem;
+  background-color: white;
+  box-shadow: none;
+  overflow: scroll;
+}
+
+.addeigenaar .dropdownformUsers {
+  display: none;
+}
+
+.addeigenaar .dropdownformUsers .dropdown {
+  width: 36rem;
+  height: 20rem;
+}
+
+.addeigenaar .dropdownformUsers label {
+  width: 100%;
+}
+
+.userinlijst {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+
+.userinlijst label {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 1rem;
+}
+
+.userinlijst label:hover {
+  background-color: #9A9A9A;
+}
+
+.userinlijst label span {
+  margin-left: 2rem;
+  width: 13rem;
+  line-height: 1.7rem;
+}
+
+.userinlijst input[type="radio"] {
+  display: none;
+}
+
+.userinlijst input[type="radio"]:checked + label {
+  background-color: #9A9A9A;
+  color: white;
+}
+
+.userinlijst img {
+  border-radius: 7rem;
+}
+
+.plot {
+  color: #9A9A9A;
+  cursor: pointer;
+}
+
+.plantbuttons {
+  margin-top: 4rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.plantbuttons .button {
+  height: auto;
+  padding: 2rem;
+  text-decoration: none;
+}
+
+.plantbuttons .waterbutton {
+  background-color: #32D6FF;
+}
+
+.plantbuttons .verwijderbutton {
+  background-color: #FF1A00;
+}
+
+.error {
+  margin-top: 1rem;
+  color: #FF1A00;
+}
+
+.errorItem {
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 2rem 0rem;
+}
+
+.errorItem p {
+  display: inline-block;
+}
+
+.errortop {
+  margin-bottom: 2rem;
+}
+
+.nousersinlijst {
+  border-bottom: none;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.nousersinlijst p {
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
