@@ -8,3 +8,4 @@ export AardeDetail from './AardeDetail.js';
 export PlantItem from './PlantItem.js';
 export PlantenForm from './PlantenForm.js';
 export DetailPerceel from './DetailPerceel.js';
+export AdminEigenaars from './AdminEigenaars.js';

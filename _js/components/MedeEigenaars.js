@@ -17,7 +17,7 @@ export default class ComponentName extends Component{
 
   render(){
 
-    console.log(this.props);
+    // console.log(this.props);
     let {voornaam, achternaam, foto} = this.props;
 
     return (

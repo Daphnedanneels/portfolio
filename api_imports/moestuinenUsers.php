@@ -13,13 +13,10 @@ $app->post($base, function($request, $response, $args){
   $moestuinUsersDAO = new MoestuinenUsersDAO();
   $moestuinenUsers = $request->getParsedBody();
 
-  // var_dump("moestuinusers",$moestuinenUsers);
-
   $users = $moestuinenUsers["users"];
   $moestuinId = $moestuinenUsers["moestuin_id"];
 
-  // var_dump("users:", $users);
-  // var_dump("moestuinid:", $moestuinId);
+
 
   foreach ($users as $user => $id) {
     $moestuinenUsers = array(
@@ -43,6 +40,20 @@ $app->post($base, function($request, $response, $args){
   return $response->withHeader('Content-Type','application/json');
 
 });
+
+$app->delete($base, function($request, $response, $args){
+
+
+
+
+  $moestuinUsersDAO = new MoestuinenUsersDAO();
+  $data = $request->getQueryParams();
+  $moestuinUsersDAO->deleteMoestuinUser($data);
+  $response->getBody()->write(json_encode(true));
+  return $response->withHeader('Content-Type','application/json');
+});
+
+
 
 /*
 $app->get(`${base}/{id}`, function($request, $response, $args){

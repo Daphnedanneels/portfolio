@@ -10,6 +10,14 @@ class MoestuinenUsersDAO extends DAO {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function deleteMoestuinUser($data){
+    $sql = "DELETE FROM `mst_moestuinen_users` WHERE `moestuin_id` = :moestuin_id AND `user_id` = :user_id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':moestuin_id', $data['moestuin_id']);
+    $stmt->bindValue(':user_id', $data['user_id']);
+    return $stmt->execute();
+  }
+
   public function insertMoestuinUser($data){
       $sql = "INSERT INTO `mst_moestuinen_users` (`moestuin_id`, `user_id`) VALUES (:moestuin_id, :user_id)";
       $stmt = $this->pdo->prepare($sql);

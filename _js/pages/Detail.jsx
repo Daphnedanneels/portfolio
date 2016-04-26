@@ -1,14 +1,16 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {basename} from '../globals';
+// import {basename} from '../globals';
 import {Link} from 'react-router';
 import {getMoestuinDetail} from '../api/moestuinen.js';
-import {AardeDetail, PlantenForm, DetailPerceel} from '../components/';
+import {AardeDetail, PlantenForm, DetailPerceel, AdminEigenaars} from '../components/';
 import {getPlanten} from '../api/planten.js';
 import {updatePercelen, getPercelenByMoestuin} from '../api/percelen.js';
-import {selectAllByMoestuin} from '../api/users.js';
+import {selectAllByMoestuin, selectAllMinFilter} from '../api/users.js';
 import token from '../auth/token';
+import {isEmpty, filter} from 'lodash';
+import {deleteMoestuinUsers, insertMoestuinUser} from '../api/moestuinenUsers.js';
 //import token from '../auth/token';
 
 //renderRole is een functie die de rol netjes omzet
@@ -34,7 +36,10 @@ export default class Detail extends Component{
       plantenFetched: false,
       selectedPerceel: '',
       selectedPlant: '',
-      errors: ''
+      errors: '',
+      allUsers: '',
+      allUsersFetched: false,
+      search: ''
     };
   }
 
@@ -53,10 +58,39 @@ export default class Detail extends Component{
     })
     .then(()=>{
       this.fetchUsers();
+    })
+    .then(()=>{
+      this.fetchAllUsers(this.state.search);
+    })
+    .catch(phpErrors =>{
+      this.setState({ errors: phpErrors});
     });
   }
 
+
+  fetchAllUsers(search){
+
+    let searchParams = {};
+    searchParams.search = search;
+    searchParams.user_id = this.state.admin.user.id;
+
+    selectAllMinFilter(searchParams)
+    .then(response=>{
+      let allUsers = filter(response, o => o.id !== this.state.admin.user.id);
+
+
+
+      //logica voor inserted user, array foreachen
+
+
+
+      this.setState({allUsers, allUsersFetched: true});
+    });
+  }
+
+
   fetchUsers(){
+    //hier wil ik alle users bij de moestuin ophalen
     selectAllByMoestuin(this.state.moestuin.id)
     .then(data=>{
       this.setState({users: data, usersFetched: true});
@@ -74,20 +108,6 @@ export default class Detail extends Component{
     getPlanten()
     .then(planten =>{
       this.setState({planten, plantenFetched: true});
-    });
-  }
-
-  showUsers(){
-
-    let eigenaarsEmail = document.querySelector('#eigenaaremail');
-    let dropdownFormUsers = document.querySelector('.dropdownformUsers');
-
-    eigenaarsEmail.addEventListener('input', ()=>{
-      dropdownFormUsers.style.display='block';
-    });
-
-    eigenaarsEmail.addEventListener('blur', ()=>{
-      dropdownFormUsers.style.display='none';
     });
   }
 
@@ -187,11 +207,60 @@ export default class Detail extends Component{
         for (let j = 0; j < parseInt(kolommen); j++){
           teller++;
           aarde= <AardeDetail key={percelen[teller].percelen_id} {...percelen[teller]} showStatus={(props)=>this.showStatus(props)} showInsert={(props)=>this.showInsert(props)}/>;
-          // aarde = "lol";
           grid.push(aarde);
         }
       }
       return grid;
+    }
+  }
+
+  removeMedeEigenaar(userId){
+    let eigenaars = filter(this.state.users, o => o.id !== userId);
+    this.setState({users: eigenaars});
+
+    let data = {
+      user_id: userId,
+      moestuin_id: this.state.moestuin.id
+    };
+
+    console.log(data);
+    deleteMoestuinUsers(data)
+    .then(()=>{
+      console.log('deleted that bitch');
+    })
+    .catch(phpErrors =>{
+      this.setState({ errors: phpErrors});
+    });
+  }
+
+  pushEigenaarIntoUsers(user){
+
+    let eigenaars = this.state.users;
+
+    eigenaars.push(user);
+    // console.log(eigenaars);
+    this.setState({users: eigenaars});
+
+    let users = [];
+    users.push(user.id);
+
+    let data = {
+      users: users,
+      moestuin_id: this.state.moestuin.id
+    };
+
+    insertMoestuinUser(data)
+    .then(()=>{
+      console.log('insert that mofo');
+    });
+  }
+
+  renderAdminPanel(){
+    let {user} = this.state.admin;
+    let {users, usersFetched, allUsers, allUsersFetched} = this.state;
+
+    if(!isEmpty(user) && usersFetched && this.state.moestuin.eigenaar === user.id && allUsersFetched){
+      return (<AdminEigenaars allUsers={allUsers} pushEigenaarIntoUsers={(usertje)=>this.pushEigenaarIntoUsers(usertje)} fetchAllUsers={(search)=>this.fetchAllUsers(search)} medeEigenaars={users} removeMedeEigenaar={userId => this.removeMedeEigenaar(userId)}/>);
     }
   }
 
@@ -213,6 +282,7 @@ export default class Detail extends Component{
     }
   }
 
+
   render(){
 
     let {naam} = this.state.moestuin;
@@ -223,8 +293,6 @@ export default class Detail extends Component{
     let style = {
       width: `${size}px`
     };
-
-    let {user} = this.state.admin;
 
     return (
       <div>
@@ -251,66 +319,7 @@ export default class Detail extends Component{
                {this.renderPercelen()}
               </ul>
             </section>
-            <section className="mijnmoestuingeigenaars">
-              <h3 className="hide">Eigenaars</h3>
-              <div className="addeigenaar">
-                <label for="eigenaaremail">Naam mede-eigenaar</label>
-                <div className="addEigenaarAction">
-                <input type="text" name="eigenaaremail" autocomplete="off" id="eigenaaremail" onClick={()=>this.showUsers()}placeholder="John Doe"/>
-                <form className="dropdownformUsers" action="#" method="POST">
-                  <div className="dropdown">
-                    <ul className="userlijst">
-                      <li className="userinlijst">
-                        <input type="radio" name="user" id="1" defaultValue="1"/>
-                        <label for="1">
-                          <img width="50" height="50" src={`${basename}/assets/img/twitter.jpg`} alt="jonas devacht"/>
-                          <span className="labelnaam">Jonas Devacht</span>
-                        </label>
-                      </li>
-                      <li className="userinlijst">
-                        <input type="radio" name="user" id="2" defaultValue="2"/>
-                        <label for="2">
-                          <img width="50" height="50" src={`${basename}/assets/img/twitter.jpg`} alt="jonas devacht"/>
-                          <span className="labelnaam">Joyce Devacht</span>
-                        </label>
-                      </li>
-                      <li className="userinlijst">
-                        <input type="radio" name="user" id="3" defaultValue="3"/>
-                        <label for="3">
-                          <img width="50" height="50" src={`${basename}/assets/img/twitter.jpg`} alt="jonas devacht"/>
-                          <span className="labelnaam">Jonas Devacht</span>
-                        </label>
-                      </li>
-                      <li className="userinlijst">
-                        <input type="radio" name="user" id="4" defaultValue="4"/>
-                        <label for="4">
-                          <img width="50" height="50" src={`${basename}/assets/img/twitter.jpg`} alt="jonas devacht"/>
-                          <span className="labelnaam">Jonas Devacht</span>
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                 </form>
-                 </div>
-              </div>
-              <div className="eigenaarwrapper">
-                <ul className="mijnmoestuineigenaars">
-                  <li className="mijnmoestuineigenaarsItem">
-                    <figure>
-                      <img src={`${basename}/assets/img/${user.foto}`} width="100" height="100" alt={user.voornaam}/>
-                      <figcaption>{user.voornaam}</figcaption>
-                    </figure>
-                  </li>
-                  <li className="mijnmoestuineigenaarsItem noAdmin">
-                    <Link className="removeuser" to="removeuser?user_id=1&moestuin_id=1"><span>-</span></Link>
-                    <figure>
-                      <img src={`${basename}/assets/img/twitter.jpg`} width="100" height="100" alt="jonas"/>
-                      <figcaption>JonasDevacht</figcaption>
-                    </figure>
-                  </li>
-                </ul>
-              </div>
-            </section>
+            {this.renderAdminPanel()}
           </div>
         </section>
       </main>

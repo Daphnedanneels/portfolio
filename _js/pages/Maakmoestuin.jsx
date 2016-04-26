@@ -90,7 +90,14 @@ export default class Maakmoestuin extends Component{
     searchParams.search = search;
 
     selectAllMinFilter(searchParams)
-    .then(users=>{
+    .then(response=>{
+      let users = filter(response, o => o.id !== this.state.user.user.id);
+
+
+
+      //logica toevoegen voor inserted users
+
+
       this.setState({users, usersFetched: true});
     });
   }
@@ -152,6 +159,7 @@ export default class Maakmoestuin extends Component{
     let {eigenaars} = this.state;
     let eigenaarsArray = [];
     eigenaars.map(eigenaar => eigenaarsArray.push(eigenaar.id));
+
 
     let data = {
       'users': eigenaarsArray,

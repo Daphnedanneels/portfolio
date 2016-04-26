@@ -980,6 +980,8 @@ align-items: center;
   display:flex;
   justify-content: flex-start;
   position:relative;
+  width:30rem;
+  flex-wrap:wrap;
 
 }
 
@@ -1001,12 +1003,11 @@ align-items: center;
  box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
 }
 
-
-
 .mijnmoestuineigenaarsItem{
 
   width:10rem;
   margin-right: 3rem;
+  margin-bottom: 3rem;
   position:relative;
 
   figure{

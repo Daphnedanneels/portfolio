@@ -10,14 +10,20 @@ export default class UserItem extends Component{
   }
 
   onClickHandler(props){
-    this.props.pushEigenaar(props);
+    console.log(props);
+
+    if (this.props.insertOnClick){
+      this.props.pushEigenaarIntoUsers(props);
+    }else{
+      this.props.pushEigenaar(props);
+    }
   }
 
   render(){
 
     let {voornaam, achternaam, foto, id} = this.props;
 
-  // console.log(this.props);
+    // console.log(this.props);
 
     return (
       <li className="userinlijst">

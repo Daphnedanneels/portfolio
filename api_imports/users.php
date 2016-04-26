@@ -35,8 +35,12 @@ $app->get($base, function($request, $response, $args){
     $data = $userDAO->selectAllUsersByMoestuinId($params['moestuin_id']);
   }
 
-  if(!empty($params['params'])){
-    $data = $userDAO->searchUsers($params['params']);
+  if(!empty($params['q'])){
+    $data = $userDAO->searchUsers($params['q']);
+  }
+
+  if(empty($params['q']) && empty($params['moestuin_id'])){
+    $data = $userDAO->selectAllMin();
   }
 
   $response->getBody()->write(json_encode($data));

@@ -47,7 +47,6 @@ export default class Detail extends Component{
   changeHandler(){
 
     let {email, wachtwoord} = this.refs;
-    console.log(wachtwoord.value);
 
     this.setState({
       email: email.value,
@@ -78,7 +77,6 @@ export default class Detail extends Component{
   render(){
 
     let {email, wachtwoord, errors={}} = this.state;
-    console.log(errors);
 
     return (
       <main className="login">

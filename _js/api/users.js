@@ -25,7 +25,6 @@ export const selectAllMin = () => {
 
   return fetch(`${basename}${base}`)
     .then(checkStatus);
-
 };
 
 
@@ -45,7 +44,7 @@ export const selectAllMinFilter = search => {
   // x-auth-token is een standaard naam die we gebruiken
   // let headers = new Headers({'x-auth-token': token.get()});
 
-  return fetch(`${basename}${base}?params=${search.search}`)
+  return fetch(`${basename}${base}?q=${search.search}`)
     .then(checkStatus);
 
 };
