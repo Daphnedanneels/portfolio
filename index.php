@@ -10,12 +10,12 @@ require 'vendor/autoload.php';
 use \Slim\App;
 $app = new App(['settings' => ['displayErrorDetails' => true]]);
 
-require_once 'api/auth.php';
-require_once 'api/users.php';
-require_once 'api/moestuin.php';
-require_once 'api/moestuinenUsers.php';
-require_once 'api/percelen.php';
-require_once 'api/planten.php';
+require_once 'api_imports/auth.php';
+require_once 'api_imports/users.php';
+require_once 'api_imports/moestuin.php';
+require_once 'api_imports/moestuinenUsers.php';
+require_once 'api_imports/percelen.php';
+require_once 'api_imports/planten.php';
 
 //WRITE CODE HERE
 

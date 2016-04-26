@@ -36,7 +36,7 @@ export default () => (
       <Route path='home' component={Home} onEnter={isLoggedIn}/>
       <Route path='login' component={Login}/>
       <Route path='register' component={Register}/>
-      <Route path='detail/:id' component={Detail} onEnter={isLoggedIn}/>
+      <Route path='moestuin/:id' component={Detail} onEnter={isLoggedIn}/>
       <Route path='maakmoestuin' component={Maakmoestuin} onEnter={isLoggedIn}/>
       <Route path='removeuser' onEnter={removeUser}/>
       <Route path='logout' onEnter={logout}/>

@@ -14,12 +14,12 @@ export default class DetailPerceel extends Component{
 
   waterHandler(e){
     e.preventDefault();
-    console.log("geef wata");
+    console.log('geef wata');
   }
 
   oogstHandler(e){
     e.preventDefault();
-    console.log("oogsta");
+    console.log('oogsta');
   }
 
   verwijderHandler(e){
@@ -31,7 +31,7 @@ export default class DetailPerceel extends Component{
 
     // console.log(this.props.selectedPlant);
 
-    let {foto, plant_naam,percelen_id} = this.props.selectedPlant;
+    let {foto, plant_naam} = this.props.selectedPlant;
 
     return (
       <div className="oogsttijdwrapper">

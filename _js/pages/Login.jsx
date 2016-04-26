@@ -107,7 +107,7 @@ export default class Detail extends Component{
               </form>
             </div>
             <div className="registreeroptie">
-               <Link to="register">Of registreer</Link>
+               <Link to="/register">Of registreer</Link>
             </div>
           </div>
         </div>

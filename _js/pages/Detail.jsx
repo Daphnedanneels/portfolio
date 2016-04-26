@@ -6,8 +6,9 @@ import {Link} from 'react-router';
 import {getMoestuinDetail} from '../api/moestuinen.js';
 import {AardeDetail, PlantenForm, DetailPerceel} from '../components/';
 import {getPlanten} from '../api/planten.js';
-import {updatePercelen} from '../api/percelen.js';
-
+import {updatePercelen, getPercelenByMoestuin} from '../api/percelen.js';
+import {selectAllByMoestuin} from '../api/users.js';
+import token from '../auth/token';
 //import token from '../auth/token';
 
 //renderRole is een functie die de rol netjes omzet
@@ -22,8 +23,13 @@ export default class Detail extends Component{
   constructor(props, context){
     super(props, context);
     this.state = {
-      moestuinDetail: '',
+      moestuin: '',
       moestuinDetailFetched: false,
+      percelen: '',
+      percelenFetched: false,
+      users: '',
+      usersFetched: '',
+      admin: token.content(),
       planten: '',
       plantenFetched: false,
       selectedPerceel: '',
@@ -33,14 +39,34 @@ export default class Detail extends Component{
   }
 
   componentDidMount(){
-    this.fetchPercelen();
+    this.fetchMoestuin();
     this.fetchPlanten();
   }
 
-  fetchPercelen(){
+  fetchMoestuin(){
     getMoestuinDetail(this.props.params.id)
-    .then(moestuinDetail =>{
-      this.setState({moestuinDetail, moestuinenFetched: true});
+    .then(moestuin =>{
+      this.setState({moestuin, moestuinenFetched: true});
+    })
+    .then(()=>{
+      this.fetchPercelen();
+    })
+    .then(()=>{
+      this.fetchUsers();
+    });
+  }
+
+  fetchUsers(){
+    selectAllByMoestuin(this.state.moestuin.id)
+    .then(data=>{
+      this.setState({users: data, usersFetched: true});
+    });
+  }
+
+  fetchPercelen(){
+    getPercelenByMoestuin(this.state.moestuin.id)
+    .then(data=>{
+      this.setState({percelen: data, percelenFetched: true});
     });
   }
 
@@ -66,8 +92,6 @@ export default class Detail extends Component{
   }
 
   showInsert(props){
-
-
     //log van de props die in de state gestoken worden
     this.setState({selectedPerceel: props});
 
@@ -91,65 +115,57 @@ export default class Detail extends Component{
     });
   }
 
-
   showStatus(props){
-    this.setState({selectedPlant:props});
+    this.setState({selectedPlant: props});
 
     let detailPerceelVenster = document.querySelector('.oogsttijdwrapper');
     detailPerceelVenster.style.display = 'flex';
   }
 
   deletePlant(props){
-
-
     let data = {
       perceel_id: props.percelen_id,
+      plant_id: props.plant_id,
       action: 'delete'
     };
 
     updatePercelen(data)
-    .then(()=>{
-      this.closeItem('', 'oogsttijdwrapper');
+    .then((updated)=>{
+      this.setState({percelen: this.setPerceelState(updated)});
     })
     .then(()=>{
-      this.fetchPercelen();
+      this.closeItem('', 'oogsttijdwrapper');
     })
     .catch(phpErrors =>{
       this.setState({ errors: phpErrors});
     });
-
   }
 
+  setPerceelState(updated){
+
+    let {percelen} = this.state;
+
+    let teller = 0;
+    let newPercelen = [];
+    [].forEach.call(percelen, perceel=>{
+      if (perceel.percelen_id === updated.percelen_id){
+        perceel = updated;
+      }
+      newPercelen.push(perceel);
+      teller++;
+    });
+
+    return newPercelen;
+  }
 
   updatePerceel(data){
 
     updatePercelen(data)
-    .then(()=>{
-      this.closeItem('', 'dropdownformwrapper');
+    .then((updated)=>{
+      this.setState({percelen: this.setPerceelState(updated)});
     })
     .then(()=>{
-      this.fetchPercelen();
-      /*
-      console.log(updated);
-      // this.fetchPercelen()
-       // this.context.router.push(`/detail/${this.props.params.id}`);
-
-      console.log("updated:",updated.percelen_id);
-      console.log(this.state.moestuinDetail);
-
-      let teller = 0;
-      let moestuinDetail = {};
-      let percelen = {};
-
-      console.log(moestuinDetail);
-      [].forEach.call(this.state.moestuinDetail.percelen, perceel=>{
-        teller++;
-        if (parseInt(perceel.percelen_id) === parseInt(updated.percelen_id)){
-          teller++;
-          perceel = updated;
-        }
-        percelen[teller] = perceel;
-      });*/
+      this.closeItem('', 'dropdownformwrapper');
     })
     .catch(phpErrors =>{
       this.setState({ errors: phpErrors});
@@ -158,20 +174,25 @@ export default class Detail extends Component{
 
   renderPercelen(){
 
-    let {percelen, kolommen, rijen} = this.state.moestuinDetail;
+    let {kolommen, rijen} = this.state.moestuin;
+    let {percelen, percelenFetched} = this.state;
 
-    let grid = [];
-    let aarde;
-    let teller = -1;
+    if (percelenFetched){
 
-    for (let i = 0; i < parseInt(rijen); i++){
-      for (let j = 0; j < parseInt(kolommen); j++){
-        teller++;
-        aarde= <AardeDetail key={percelen[teller].percelen_id} {...percelen[teller]} showStatus={(props)=>this.showStatus(props)} showInsert={(props)=>this.showInsert(props)}/>;
-        grid.push(aarde);
+      let grid = [];
+      let aarde;
+      let teller = -1;
+
+      for (let i = 0; i < parseInt(rijen); i++){
+        for (let j = 0; j < parseInt(kolommen); j++){
+          teller++;
+          aarde= <AardeDetail key={percelen[teller].percelen_id} {...percelen[teller]} showStatus={(props)=>this.showStatus(props)} showInsert={(props)=>this.showInsert(props)}/>;
+          // aarde = "lol";
+          grid.push(aarde);
+        }
       }
+      return grid;
     }
-    return grid;
   }
 
   closeItem(e, item){
@@ -194,24 +215,26 @@ export default class Detail extends Component{
 
   render(){
 
-   // let {selectedPlant} = this.state;
+    let {naam} = this.state.moestuin;
 
-    let {kolommen} = this.state.moestuinDetail;
+    let {kolommen} = this.state.moestuin;
 
     let size = Math.round(184*kolommen);
     let style = {
       width: `${size}px`
     };
 
+    let {user} = this.state.admin;
+
     return (
       <div>
       <section className="breadcrumbwrapper">
         <h2 className="hide">Breadcrumb</h2>
-        <Link to="home" className="previous" >&lt;</Link>
+        <Link to="/home" className="previous" >&lt;</Link>
         <ul className="breadcrumblijst">
-          <li><Link className="breadcrumbitem" to="home">Mijn moestuinen</Link></li>
+          <li><Link className="breadcrumbitem" to="/home">Mijn moestuinen</Link></li>
           <li>></li>
-          <li><p className="breadcrumbitem" >Jonas' moestuin</p></li>
+          <li><p className="breadcrumbitem">{naam}</p></li>
         </ul>
       </section>
       <main className="mijnmoestuin">
@@ -219,7 +242,7 @@ export default class Detail extends Component{
           <PlantenForm planten={this.state.planten} updatePerceel={(data)=>this.updatePerceel(data)} closeItem={(e, item)=>this.closeItem(e, item)} selectedPerceel={this.state.selectedPerceel} plantenFetched={this.state.plantenFetched}/>
           <DetailPerceel closeItem={(e, item)=>this.closeItem(e, item)} selectedPlant={this.state.selectedPlant} deletePlant={(props) => this.deletePlant(props)}/>
           <header className="moestuinenheader">
-            <h2>Jonas' moestuin</h2>
+            <h2>{naam}</h2>
           </header>
           <div className="mijntuinoverzicht" >
             <section className="tuin" >
@@ -274,8 +297,8 @@ export default class Detail extends Component{
                 <ul className="mijnmoestuineigenaars">
                   <li className="mijnmoestuineigenaarsItem">
                     <figure>
-                      <img src={`${basename}/assets/img/twitter.jpg`} width="100" height="100" alt="jonas"/>
-                      <figcaption>Jonas</figcaption>
+                      <img src={`${basename}/assets/img/${user.foto}`} width="100" height="100" alt={user.voornaam}/>
+                      <figcaption>{user.voornaam}</figcaption>
                     </figure>
                   </li>
                   <li className="mijnmoestuineigenaarsItem noAdmin">

@@ -15,6 +15,10 @@ export const insertPercelen = data => {
     .then(checkStatus);
 };
 
+export const getPercelenByMoestuin = id =>{
+  return fetch(`${basename}/api/percelen?moestuin_id=${id}`)
+  .then(checkStatus);
+};
 
 export const updatePercelen = data =>{
 
@@ -28,6 +32,7 @@ export const updatePercelen = data =>{
 };
 
 export default {
+  getPercelenByMoestuin,
   insertPercelen,
   updatePercelen
 };

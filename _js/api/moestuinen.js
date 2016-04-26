@@ -13,7 +13,7 @@ export const getMoestuinByUser = userId => {
 
 export const getMoestuinDetail = (id) => {
   // let headers = new Headers({'x-auth-token': token.get()});
-  return fetch(`${basename}/api/moestuinen/${id}}`)
+  return fetch(`${basename}/api/moestuinen/${id}`)
   .then(checkStatus);
 };
 

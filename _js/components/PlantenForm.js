@@ -46,7 +46,7 @@ export default class PlantenForm extends Component{
       let data = {
         'perceel_id': selectedPerceel.percelen_id,
         'plant_id': id,
-        'action':'insert'
+        'action': 'insert'
       };
       this.props.updatePerceel(data);
 

@@ -28,7 +28,7 @@ export default class App extends React.Component {
               <span>{`${user.voornaam} ${user.achternaam}`}</span>
             </h2>
           </div>
-          <Link to="logout" className="logout" >Logout</Link>
+          <Link to="/logout" className="logout" >Logout</Link>
         </section>
       );
     }
@@ -56,7 +56,7 @@ export default class App extends React.Component {
     return (
       <div className="container">
         <header className="topbar menu">
-          <Link to="home">
+          <Link to="/home">
           <h1 className="logo">
             <img src={`${basename}/assets/logo/logo.svg`} width="40" height="40" alt="moestuinbeheerder" />
             <span>Moestuinbeheerder</span>

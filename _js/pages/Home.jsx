@@ -22,7 +22,6 @@ export default class Home extends Component{
 
   componentDidMount(){
 
-    console.log("jeet");
     let {user} = token.content();
 
     getMoestuinByUser(user.id)
@@ -33,6 +32,7 @@ export default class Home extends Component{
 
   renderTuinen(){
     let {moestuinen, moestuinenFetched} = this.state;
+
     if(moestuinenFetched){
       return moestuinen.map(moestuin => <MoestuinItem key={moestuin.moestuinen_id} {...moestuin} />);
     }
@@ -49,7 +49,7 @@ export default class Home extends Component{
             <ul className="moestuinoplijsting">
                {this.renderTuinen()}
               <li className="addmoestuin">
-                <Link to="maakmoestuin">
+                <Link to="/maakmoestuin">
                   <p className="addicon">+</p>
                   <p className="moestuintitel">Voeg een moestuin toe.</p>
                 </Link>

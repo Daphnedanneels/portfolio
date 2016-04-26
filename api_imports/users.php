@@ -29,12 +29,14 @@ $app->get($base, function($request, $response, $args){
   $userDAO = new UserDAO();
 
   $data = array();
-  $search = $request->getQueryParams();
+  $params = $request->getQueryParams();
 
-  if(empty($search)){
-    $data = $userDAO->selectAllMin();
-  }else{
-    $data = $userDAO->searchUsers($search);
+  if(!empty($params['moestuin_id'])){
+    $data = $userDAO->selectAllUsersByMoestuinId($params['moestuin_id']);
+  }
+
+  if(!empty($params['params'])){
+    $data = $userDAO->searchUsers($params['params']);
   }
 
   $response->getBody()->write(json_encode($data));

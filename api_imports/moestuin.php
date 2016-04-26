@@ -38,20 +38,9 @@ $app->get('/api/moestuinen/{id}', function($request, $response, $args){
   $moestuinDAO = new MoestuinDAO();
   $moestuin = $moestuinDAO->selectMoestuinenById($args['id']);
 
-  $percelenDAO = new PercelenDAO();
-  $percelen = $percelenDAO->selectPercelenByMoestuinId($moestuin['id']);
-
-  $moestuinUsersDAO = new MoestuinenUsersDAO();
-  $moestuinUsers = $moestuinUsersDAO->selectAllUsersByMoestuinId($args['id']);
-
-  $moestuin['percelen'] = $percelen;
-  $moestuin['users'] = $moestuinUsers;
-
   $response->getBody()->write(json_encode($moestuin));
   return $response->withHeader('Content-Type','application/json');
 });
-
-
 
 
 

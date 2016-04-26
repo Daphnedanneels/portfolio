@@ -3,7 +3,7 @@ require_once WWW_ROOT . 'dao' . DS . 'DAO.php';
 class PercelenDAO extends DAO {
 
   public function selectPercelenById($id){
-    $sql = "SELECT * FROM `mst_percelen` WHERE `id` = :id";
+    $sql = "SELECT *, mst_percelen.id AS percelen_id FROM `mst_percelen` LEFT JOIN mst_planten on mst_percelen.plant_id = mst_planten.id WHERE mst_percelen.id = :id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
     $stmt->execute();
@@ -43,7 +43,7 @@ class PercelenDAO extends DAO {
   }
 
   public function verwijderPlantBijPerceel($data){
-     $errors = $this->getValidationErrors2($data);
+     $errors = $this->getValidationErrors($data);
       if(empty($errors)) {
         $sql = "UPDATE `mst_percelen` SET `plant_id`= :plant_id , `status`= :status WHERE id = :perceel_id";
         $stmt = $this->pdo->prepare($sql);
@@ -81,13 +81,7 @@ class PercelenDAO extends DAO {
     return $errors;
   }
 
-   public function getValidationErrors2($data) {
-    $errors = array();
-    if(empty($data['perceel_id'])) {
-      $errors['perceel_id'] = 'Je bent je perceel id vergeten';
-    }
-    return $errors;
-  }
+
 
 
 }

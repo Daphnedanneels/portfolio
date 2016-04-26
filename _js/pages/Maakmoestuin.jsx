@@ -61,12 +61,6 @@ export default class Maakmoestuin extends Component{
     dropdownFormUsers.addEventListener('blur', ()=>{
       dropdownFormUsers.style.display='none';
     });
-
-    /*
-    inputUser.addEventListener('blur', ()=>{
-      dropdownFormUsers.style.display='none';
-    });*/
-
   }
 
   validate(){
@@ -230,9 +224,9 @@ export default class Maakmoestuin extends Component{
       <div>
         <section className="breadcrumbwrapper">
           <h2 className="hide">breadcrumb</h2>
-          <Link className="previous" to="home">&lt;</Link>
+          <Link className="previous" to="/home">&lt;</Link>
           <ul className="breadcrumblijst">
-            <li><Link className="breadcrumbitem" to="home">Mijn moestuinen</Link></li>
+            <li><Link className="breadcrumbitem" to="/home">Mijn moestuinen</Link></li>
             <li>&lt;</li>
             <li><p className="breadcrumbitem" >Maak een moestuin</p></li>
           </ul>

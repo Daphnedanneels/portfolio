@@ -7,6 +7,21 @@ require_once WWW_ROOT . 'dao' . DS . 'PercelenDAO.php';
 
 $base = '/api/percelen';
 
+$app->get('/api/percelen', function($request, $response, $args){
+
+  $percelenDAO = new PercelenDAO();
+  $params = $request->getQueryParams();
+  $percelen = $percelenDAO->selectPercelenByMoestuinId($params['moestuin_id']);
+
+  // var_dump($params['moestuin_id']);
+
+  $response->getBody()->write(json_encode($percelen));
+  $response = $response->withHeader('Content-Type','application/json');
+  return $response;
+});
+
+
+
 $app->post($base, function($request, $response, $args){
 
   $PercelenDAO = new PercelenDAO();
@@ -41,7 +56,6 @@ $app->put($base, function($request, $response, $args){
 
   $PercelenDAO = new PercelenDAO();
   $data = $request->getParsedBody();
-
 
   if ($data['action'] === "insert"){
     $updatedPerceel = $PercelenDAO->insertPlantBijPerceel($data);

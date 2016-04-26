@@ -10,16 +10,6 @@ class MoestuinenUsersDAO extends DAO {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function selectAllUsersByMoestuinId($moestuin_id){
-    $sql = "SELECT * FROM mst_moestuinen_users INNER JOIN mst_users on
-            mst_moestuinen_users.user_id = mst_users.id WHERE mst_moestuinen_users.moestuin_id = :moestuin_id ";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindValue(':moestuin_id', $moestuin_id);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-
   public function insertMoestuinUser($data){
       $sql = "INSERT INTO `mst_moestuinen_users` (`moestuin_id`, `user_id`) VALUES (:moestuin_id, :user_id)";
       $stmt = $this->pdo->prepare($sql);

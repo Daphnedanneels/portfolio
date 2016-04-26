@@ -19,10 +19,6 @@ class UserDAO extends DAO {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-
-
-
-
   public function searchUsers($search){
     $sql = "SELECT `voornaam`, `achternaam`, `foto`, `id` FROM `mst_users`
             WHERE `voornaam` LIKE :voornaam OR `achternaam` LIKE :achternaam
@@ -30,8 +26,8 @@ class UserDAO extends DAO {
 
     $stmt = $this->pdo->prepare($sql);
 
-    $stmt->bindValue(":voornaam", '%' . $search['params'] . '%');
-    $stmt->bindValue(":achternaam", '%' . $search['params'] . '%');
+    $stmt->bindValue(":voornaam", '%' . $search. '%');
+    $stmt->bindValue(":achternaam", '%' . $search. '%');
 
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -57,6 +53,14 @@ class UserDAO extends DAO {
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function selectAllUsersByMoestuinId($moestuin_id){
+    $sql = "SELECT * FROM mst_moestuinen_users INNER JOIN mst_users on
+            mst_moestuinen_users.user_id = mst_users.id WHERE mst_moestuinen_users.moestuin_id = :moestuin_id ";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':moestuin_id', $moestuin_id);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 
   public function insert($data) {
     $errors = $this->getValidationErrors($data);

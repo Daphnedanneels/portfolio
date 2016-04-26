@@ -28,6 +28,18 @@ export const selectAllMin = () => {
 
 };
 
+
+export const selectAllByMoestuin = moestuin_id => {
+
+  // x-auth-token is een standaard naam die we gebruiken
+  // let headers = new Headers({'x-auth-token': token.get()});
+
+  return fetch(`${basename}${base}?moestuin_id=${moestuin_id}`)
+    .then(checkStatus);
+
+};
+
+
 export const selectAllMinFilter = search => {
 
   // x-auth-token is een standaard naam die we gebruiken
@@ -41,5 +53,6 @@ export const selectAllMinFilter = search => {
 export default {
   insert,
   selectAllMin,
-  selectAllMinFilter
+  selectAllMinFilter,
+  selectAllByMoestuin
 };

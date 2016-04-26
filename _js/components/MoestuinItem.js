@@ -16,7 +16,7 @@ export default class Moestuinitem extends Component{
 
     return (
       <li className="moestuinitem">
-        <Link to={`detail/${moestuinen_id}`} className="moestuinhover">
+        <Link to={`/moestuin/${moestuinen_id}`} className="moestuinhover">
           <div className="blackoverlay">
             <button className="detailbutton" type=""></button>
           </div>
