@@ -59,9 +59,6 @@ export default class Detail extends Component{
     .then(()=>{
       this.fetchUsers();
     })
-    .then(()=>{
-      this.fetchAllUsers(this.state.search);
-    })
     .catch(phpErrors =>{
       this.setState({ errors: phpErrors});
     });
@@ -72,20 +69,37 @@ export default class Detail extends Component{
 
     let searchParams = {};
     searchParams.search = search;
-    searchParams.user_id = this.state.admin.user.id;
 
     selectAllMinFilter(searchParams)
     .then(response=>{
-      let allUsers = filter(response, o => o.id !== this.state.admin.user.id);
+      console.log("response",response);
+
+      let usersWithoutAdmin = [];
+      if (!isEmpty(response)){
+        usersWithoutAdmin = filter(response, o => o.id !== this.state.admin.user.id);
+        this.setState({allUsers:usersWithoutAdmin});
+        // console.log("length",usersWithoutAdmin.length);
+        for (let i = 0; i< usersWithoutAdmin.length; i++) {
+
+          for (let j = 0; j< this.state.users.length; j++) {
+            console.log(i);
+            console.log("testrender",i, usersWithoutAdmin[i]);
+            if(usersWithoutAdmin[i].id === this.state.users[j].id){
+              usersWithoutAdmin.splice(i,1);
+              this.setState({allUsers:usersWithoutAdmin});
+            }
+          }
+        }
+
+      }
 
 
-
-      //logica voor inserted user, array foreachen
-
-
-
-      this.setState({allUsers, allUsersFetched: true});
-    });
+      // this.setState({allUsers:usersWithoutAdmin});
+      this.setState({allUsers:usersWithoutAdmin,allUsersFetched: true});
+    })
+    // .catch(phpErrors =>{
+    //   this.setState({ errors: phpErrors});
+    // });
   }
 
 
@@ -93,8 +107,14 @@ export default class Detail extends Component{
     //hier wil ik alle users bij de moestuin ophalen
     selectAllByMoestuin(this.state.moestuin.id)
     .then(data=>{
-      this.setState({users: data, usersFetched: true});
-    });
+      // let users = filter(data, o => o.id !== this.state.admin.user.id);
+      this.setState({users:data, usersFetched: true});
+    })
+    .then(()=>{
+      if (this.state.usersFetched){
+        this.fetchAllUsers(this.state.search);
+      }
+    })
   }
 
   fetchPercelen(){
@@ -223,11 +243,8 @@ export default class Detail extends Component{
       moestuin_id: this.state.moestuin.id
     };
 
-    console.log(data);
+
     deleteMoestuinUsers(data)
-    .then(()=>{
-      console.log('deleted that bitch');
-    })
     .catch(phpErrors =>{
       this.setState({ errors: phpErrors});
     });
@@ -238,8 +255,10 @@ export default class Detail extends Component{
     let eigenaars = this.state.users;
 
     eigenaars.push(user);
-    // console.log(eigenaars);
+    console.log("eigenaars",eigenaars);
     this.setState({users: eigenaars});
+
+    console.log(this.state.users);
 
     let users = [];
     users.push(user.id);
@@ -250,8 +269,8 @@ export default class Detail extends Component{
     };
 
     insertMoestuinUser(data)
-    .then(()=>{
-      console.log('insert that mofo');
+    .catch(phpErrors =>{
+      this.setState({ errors: phpErrors});
     });
   }
 
@@ -259,8 +278,8 @@ export default class Detail extends Component{
     let {user} = this.state.admin;
     let {users, usersFetched, allUsers, allUsersFetched} = this.state;
 
-    if(!isEmpty(user) && usersFetched && this.state.moestuin.eigenaar === user.id && allUsersFetched){
-      return (<AdminEigenaars allUsers={allUsers} pushEigenaarIntoUsers={(usertje)=>this.pushEigenaarIntoUsers(usertje)} fetchAllUsers={(search)=>this.fetchAllUsers(search)} medeEigenaars={users} removeMedeEigenaar={userId => this.removeMedeEigenaar(userId)}/>);
+    if (allUsersFetched && usersFetched){
+      return (<AdminEigenaars moestuin={this.state.moestuin} allUsers={allUsers} pushEigenaarIntoUsers={(usertje)=>this.pushEigenaarIntoUsers(usertje)} fetchAllUsers={(search)=>this.fetchAllUsers(search)} medeEigenaars={users} removeMedeEigenaar={userId => this.removeMedeEigenaar(userId)}/>);
     }
   }
 

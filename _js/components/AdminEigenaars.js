@@ -34,12 +34,51 @@ export default class AdminEigenaars extends Component{
 
     dropdownFormUsers.addEventListener('click', ()=>{
       dropdownFormUsers.style.display='none';
+      this.setState({search: ''})
     });
+
+    document.querySelector('body').addEventListener('click', ()=>{
+      dropdownFormUsers.style.display='none';
+
+    });
+
   }
+
+  /*
+  --LIJST MET ALLE EVENTS--
+
+   *Mouse
+      click
+      dblclick
+      mousedown
+      mouseup
+      mouseover
+      mouseout
+      mousemove
+
+   *Keyboard
+      input
+      keydown
+      keypress
+      keyup
+
+   *Form
+      submit
+      change
+      input
+
+   *User Interface
+      load
+      unload
+      error
+      resize
+      scroll
+
+  */
 
   renderMedeEigenaars(){
     let {medeEigenaars} = this.props;
-    return medeEigenaars.map(medeEigenaar => <MedeEigenaars removeMedeEigenaar={(userId) => this.props.removeMedeEigenaar(userId)} key={medeEigenaar.id} {...medeEigenaar} />);
+    return medeEigenaars.map(medeEigenaar => <MedeEigenaars moestuin={this.props.moestuin} removeMedeEigenaar={(userId) => this.props.removeMedeEigenaar(userId)} key={medeEigenaar.id} {...medeEigenaar} />);
   }
 
   renderAllUsers(){
@@ -55,10 +94,10 @@ export default class AdminEigenaars extends Component{
 
   render(){
 
-    // console.log(this.props);
+
     let user = token.content().user;
     let {search} = this.state;
-    // console.log(user);
+
 
     return (
      <section className="mijnmoestuingeigenaars">
@@ -80,12 +119,6 @@ export default class AdminEigenaars extends Component{
         </div>
         <div className="eigenaarwrapper">
           <ul className="mijnmoestuineigenaars">
-            <li className="mijnmoestuineigenaarsItem">
-              <figure>
-                <img src={`${basename}/assets/img/${user.foto}`} width="100" height="100" alt={user.voornaam}/>
-                <figcaption>{user.voornaam}</figcaption>
-              </figure>
-            </li>
             {this.renderMedeEigenaars()}
           </ul>
         </div>

@@ -1451,3 +1451,37 @@ html, body {
 .hide {
   display: none;
 }
+
+.admin img {
+  border: 0.8rem solid #32D6FF;
+}
+
+.user img {
+  border: 0.8rem solid #66DB52;
+}
+
+.order2 {
+  -webkit-order: -98;
+      -ms-flex-order: -98;
+          order: -98;
+}
+
+.order {
+  -webkit-order: -99;
+      -ms-flex-order: -99;
+          order: -99;
+}
+
+.statusBlok {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.blauw {
+  color: #32D6FF;
+}
+
+.groen {
+  color: #66DB52;
+}

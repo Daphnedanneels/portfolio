@@ -82,25 +82,32 @@ $app->get($base.'/{id}', function($request, $response, $args){
 $app->post($base, function($request, $response, $args){
 
   $userDAO = new UserDAO();
-
   $user = $request->getParsedBody();
 
-  if($user['wachtwoord']){
-    $user['wachtwoord'] = BCrypt::hash($user['wachtwoord']);
-  }
+  $email = $userDAO->selectByEmail($user['email']);
 
-  $insertedUser = $userDAO->insert($user);
-
-  if(empty($insertedUser)) {
-    $errors = array();
-    $errors['errors'] = $userDAO->getValidationErrors($user);
+  if (!empty($email)){
+    $errors['error'][0] = "Dit email is al in gebruik";
     $response->getBody()->write(json_encode($errors));
     $response = $response->withStatus(400);
-  } else {
-    $response->getBody()->write(json_encode($insertedUser));
-    $response = $response->withStatus(201);
-  }
+  }else{
+    if($user['wachtwoord']){
+      $user['wachtwoord'] = BCrypt::hash($user['wachtwoord']);
+    }
+    $insertedUser = $userDAO->insert($user);
 
-  return $response->withHeader('Content-Type','application/json');
+    if(empty($insertedUser)) {
+      $errors = array();
+      $errors['errors'] = $userDAO->getValidationErrors($user);
+      $response->getBody()->write(json_encode($errors));
+      $response = $response->withStatus(400);
+    } else {
+      $response->getBody()->write(json_encode($insertedUser));
+      $response = $response->withStatus(201);
+    }
+  }
+   return $response->withHeader('Content-Type','application/json');
+
+
 
 });

@@ -54,8 +54,7 @@ class UserDAO extends DAO {
   }
 
   public function selectAllUsersByMoestuinId($moestuin_id){
-    $sql = "SELECT * FROM mst_moestuinen_users INNER JOIN mst_users on
-            mst_moestuinen_users.user_id = mst_users.id WHERE mst_moestuinen_users.moestuin_id = :moestuin_id ";
+    $sql = "SELECT * FROM mst_moestuinen_users RIGHT JOIN mst_moestuinen on mst_moestuinen_users.moestuin_id = mst_moestuinen.id INNER JOIN mst_users on mst_moestuinen.eigenaar = mst_users.id OR mst_moestuinen_users.user_id = mst_users.id where mst_moestuinen.id = :moestuin_id GROUP BY mst_users.id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':moestuin_id', $moestuin_id);
     $stmt->execute();

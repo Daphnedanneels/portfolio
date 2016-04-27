@@ -1190,6 +1190,39 @@ justify-content: space-between;
   display:none;
 }
 
+.admin img{
+  border:0.8rem solid $blauw;
+}
+
+.user img{
+  border:0.8rem solid $groen;
+}
+
+.order2{
+  order:-98;
+}
+
+
+.order{
+  order:-99;
+}
+
+.statusBlok{
+  text-align: center;
+  // background-color:
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  // font-weight: bolder;
+}
+
+
+.blauw{
+  color:$blauw;
+}
+
+.groen{
+  color:$groen;
+}
 
 
 

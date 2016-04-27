@@ -16,7 +16,8 @@ export default class Home extends Component{
     super(props, context);
     this.state = {
       moestuinen: '',
-      moestuinenFetched: false
+      moestuinenFetched: false,
+      errors: ''
     };
   }
 
@@ -27,10 +28,16 @@ export default class Home extends Component{
     getMoestuinByUser(user.id)
     .then(moestuinen =>{
       this.setState({moestuinen, moestuinenFetched: true});
+    })
+    .catch(phpErrors =>{
+      this.setState({errors: phpErrors, wachtwoord: ''});
+      console.log(this.state.errors);
     });
+
   }
 
   renderTuinen(){
+
     let {moestuinen, moestuinenFetched} = this.state;
 
     if(moestuinenFetched){
@@ -39,6 +46,9 @@ export default class Home extends Component{
   }
 
   render(){
+
+
+
     return (
       <div>
         <main className="overzicht">

@@ -56,10 +56,12 @@ export default class Maakmoestuin extends Component{
 
     dropdownFormUsers.addEventListener('click', ()=>{
       dropdownFormUsers.style.display='none';
+      this.setState({search: ''})
     });
 
-    dropdownFormUsers.addEventListener('blur', ()=>{
+    document.querySelector('body').addEventListener('click', ()=>{
       dropdownFormUsers.style.display='none';
+
     });
   }
 
@@ -143,7 +145,8 @@ export default class Maakmoestuin extends Component{
         if(!isEmpty(this.state.eigenaars)){
           this.insertMoestuinUsers();
         }else{
-          this.context.router.push('/home');
+
+          this.context.router.push(`/moestuin/${this.state.moestuinId}`);
         }
       })
       .catch(phpErrors =>{
@@ -186,6 +189,7 @@ export default class Maakmoestuin extends Component{
 
   pushEigenaar(user){
     let {eigenaars} = this.state;
+    console.log(user);
     eigenaars.push(user);
     this.setState({eigenaars});
   }

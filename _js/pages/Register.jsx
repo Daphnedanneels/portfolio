@@ -80,9 +80,10 @@ export default class Register extends Component{
       .then(()=> login(this.state))
       .then(t=>token.set(t))
       .then(()=>{
-        this.context.router.push('/home');
+        this.context.router.push('/maakmoestuin');
       })
       .catch(phpErrors =>{
+        console.log(phpErrors);
         this.setState({errors: phpErrors, wachtwoord: ''});
       });
     }else{
@@ -93,7 +94,7 @@ export default class Register extends Component{
   render(){
     let {voornaam, achternaam, email, wachtwoord, errors={}} = this.state;
 
-    console.log(errors);
+    console.log(errors.error)
 
     return (
       <div>
