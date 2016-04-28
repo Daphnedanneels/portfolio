@@ -6,11 +6,13 @@ import {Link} from 'react-router';
 import {getMoestuinDetail} from '../api/moestuinen.js';
 import {AardeDetail, PlantenForm, DetailPerceel, AdminEigenaars} from '../components/';
 import {getPlanten} from '../api/planten.js';
-import {updatePercelen, getPercelenByMoestuin} from '../api/percelen.js';
+import {updatePercelen, getPercelenByMoestuin, updateWater} from '../api/percelen.js';
 import {selectAllByMoestuin, selectAllMinFilter} from '../api/users.js';
 import token from '../auth/token';
 import {isEmpty, filter} from 'lodash';
 import {deleteMoestuinUsers, insertMoestuinUser} from '../api/moestuinenUsers.js';
+
+
 //import token from '../auth/token';
 
 //renderRole is een functie die de rol netjes omzet
@@ -39,13 +41,20 @@ export default class Detail extends Component{
       errors: '',
       allUsers: '',
       allUsersFetched: false,
-      search: ''
+      search: '',
+      seconds: 0,
+      interval: '',
+      removeButton: ''
     };
   }
 
   componentDidMount(){
     this.fetchMoestuin();
     this.fetchPlanten();
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.state.interval);
   }
 
   fetchMoestuin(){
@@ -72,34 +81,31 @@ export default class Detail extends Component{
 
     selectAllMinFilter(searchParams)
     .then(response=>{
-      console.log("response",response);
+      // console.log("response",response);
 
       let usersWithoutAdmin = [];
       if (!isEmpty(response)){
         usersWithoutAdmin = filter(response, o => o.id !== this.state.admin.user.id);
-        this.setState({allUsers:usersWithoutAdmin});
+        this.setState({allUsers: usersWithoutAdmin});
         // console.log("length",usersWithoutAdmin.length);
         for (let i = 0; i< usersWithoutAdmin.length; i++) {
 
           for (let j = 0; j< this.state.users.length; j++) {
-            console.log(i);
-            console.log("testrender",i, usersWithoutAdmin[i]);
+            // console.log(i);
+            // console.log("testrender",i, usersWithoutAdmin[i]);
             if(usersWithoutAdmin[i].id === this.state.users[j].id){
-              usersWithoutAdmin.splice(i,1);
-              this.setState({allUsers:usersWithoutAdmin});
+              usersWithoutAdmin.splice(i, 1);
+              this.setState({allUsers: usersWithoutAdmin});
             }
           }
         }
-
       }
 
-
-      // this.setState({allUsers:usersWithoutAdmin});
-      this.setState({allUsers:usersWithoutAdmin,allUsersFetched: true});
+      this.setState({allUsers: usersWithoutAdmin, allUsersFetched: true});
     })
-    // .catch(phpErrors =>{
-    //   this.setState({ errors: phpErrors});
-    // });
+    .catch(phpErrors =>{
+      this.setState({errors: phpErrors});
+    });
   }
 
 
@@ -108,13 +114,13 @@ export default class Detail extends Component{
     selectAllByMoestuin(this.state.moestuin.id)
     .then(data=>{
       // let users = filter(data, o => o.id !== this.state.admin.user.id);
-      this.setState({users:data, usersFetched: true});
+      this.setState({users: data, usersFetched: true});
     })
     .then(()=>{
       if (this.state.usersFetched){
         this.fetchAllUsers(this.state.search);
       }
-    })
+    });
   }
 
   fetchPercelen(){
@@ -158,8 +164,17 @@ export default class Detail extends Component{
   showStatus(props){
     this.setState({selectedPlant: props});
 
+
     let detailPerceelVenster = document.querySelector('.oogsttijdwrapper');
     detailPerceelVenster.style.display = 'flex';
+
+    this.setState({'interval': setInterval(()=>this.count(), 1000)});
+  }
+
+  count(){
+    let {seconds} = this.state;
+    seconds++;
+    this.setState({seconds});
   }
 
   deletePlant(props){
@@ -180,6 +195,20 @@ export default class Detail extends Component{
       this.setState({ errors: phpErrors});
     });
   }
+
+  waterPlant(props){
+    let data = {
+      perceel_id: props.percelen_id,
+      action: 'water'
+    };
+
+    updateWater(data)
+    .then((response)=>{
+      this.setState({percelen: this.setPerceelState(response)});
+      this.closeItem('', 'oogsttijdwrapper');
+    });
+  }
+
 
   setPerceelState(updated){
 
@@ -255,10 +284,7 @@ export default class Detail extends Component{
     let eigenaars = this.state.users;
 
     eigenaars.push(user);
-    console.log("eigenaars",eigenaars);
     this.setState({users: eigenaars});
-
-    console.log(this.state.users);
 
     let users = [];
     users.push(user.id);
@@ -275,9 +301,7 @@ export default class Detail extends Component{
   }
 
   renderAdminPanel(){
-    let {user} = this.state.admin;
     let {users, usersFetched, allUsers, allUsersFetched} = this.state;
-
     if (allUsersFetched && usersFetched){
       return (<AdminEigenaars moestuin={this.state.moestuin} allUsers={allUsers} pushEigenaarIntoUsers={(usertje)=>this.pushEigenaarIntoUsers(usertje)} fetchAllUsers={(search)=>this.fetchAllUsers(search)} medeEigenaars={users} removeMedeEigenaar={userId => this.removeMedeEigenaar(userId)}/>);
     }
@@ -289,6 +313,7 @@ export default class Detail extends Component{
       e.preventDefault();
     }
 
+    clearInterval(this.state.interval);
     let venster = document.querySelector(`.${item}`);
     venster.style.display = 'none';
 
@@ -300,6 +325,7 @@ export default class Detail extends Component{
       });
     }
   }
+
 
 
   render(){
@@ -327,7 +353,7 @@ export default class Detail extends Component{
       <main className="mijnmoestuin">
         <section className="mijnmoetuinwrapper">
           <PlantenForm planten={this.state.planten} updatePerceel={(data)=>this.updatePerceel(data)} closeItem={(e, item)=>this.closeItem(e, item)} selectedPerceel={this.state.selectedPerceel} plantenFetched={this.state.plantenFetched}/>
-          <DetailPerceel closeItem={(e, item)=>this.closeItem(e, item)} selectedPlant={this.state.selectedPlant} deletePlant={(props) => this.deletePlant(props)}/>
+          <DetailPerceel closeItem={(e, item)=>this.closeItem(e, item)} waterPlant={(props)=>this.waterPlant(props)} selectedPlant={this.state.selectedPlant} deletePlant={(props) => this.deletePlant(props)}/>
           <header className="moestuinenheader">
             <h2>{naam}</h2>
           </header>

@@ -1,8 +1,6 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {basename} from '../globals';
-import token from '../auth/token';
 import {MedeEigenaars, UserItem, NoUserItem} from '../components/';
 import {isEmpty} from 'lodash';
 
@@ -34,7 +32,7 @@ export default class AdminEigenaars extends Component{
 
     dropdownFormUsers.addEventListener('click', ()=>{
       dropdownFormUsers.style.display='none';
-      this.setState({search: ''})
+      this.setState({search: ''});
     });
 
     document.querySelector('body').addEventListener('click', ()=>{
@@ -43,38 +41,6 @@ export default class AdminEigenaars extends Component{
     });
 
   }
-
-  /*
-  --LIJST MET ALLE EVENTS--
-
-   *Mouse
-      click
-      dblclick
-      mousedown
-      mouseup
-      mouseover
-      mouseout
-      mousemove
-
-   *Keyboard
-      input
-      keydown
-      keypress
-      keyup
-
-   *Form
-      submit
-      change
-      input
-
-   *User Interface
-      load
-      unload
-      error
-      resize
-      scroll
-
-  */
 
   renderMedeEigenaars(){
     let {medeEigenaars} = this.props;
@@ -94,10 +60,7 @@ export default class AdminEigenaars extends Component{
 
   render(){
 
-
-    let user = token.content().user;
     let {search} = this.state;
-
 
     return (
      <section className="mijnmoestuingeigenaars">

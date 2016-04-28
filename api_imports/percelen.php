@@ -65,6 +65,10 @@ $app->put($base, function($request, $response, $args){
     $updatedPerceel = $PercelenDAO->verwijderPlantBijPerceel($data);
   }
 
+  if($data['action'] === "water"){
+    $updatedPerceel = $PercelenDAO-> updateWater($data);
+  }
+
   if(empty($updatedPerceel)){
     $errors['errors'] = $PercelenDAO->getValidationErrors($data);
     $response->getBody()->write(json_encode($errors));

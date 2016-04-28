@@ -57,11 +57,6 @@ export default class AardeDetail extends Component{
            <p className={`perceelhover ${this.renderAddClass(status)}`}>+</p>
          </Link>
          <div className={`water ${this.renderAddClass(status+1)}`}>
-          <div className="watericon"></div>
-          <div className="status">
-            <div className="waternu"></div>
-            <div className="watertotaal"></div>
-          </div>
         </div>
        </li>
 

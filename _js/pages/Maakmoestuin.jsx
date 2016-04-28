@@ -35,7 +35,8 @@ export default class Maakmoestuin extends Component{
       search: '',
       errors: '',
       moestuinId: '',
-      grid: ''
+      grid: '',
+      dummyEigenaars: ''
     };
 
     this.getUsers();
@@ -56,7 +57,7 @@ export default class Maakmoestuin extends Component{
 
     dropdownFormUsers.addEventListener('click', ()=>{
       dropdownFormUsers.style.display='none';
-      this.setState({search: ''})
+      this.setState({search: ''});
     });
 
     document.querySelector('body').addEventListener('click', ()=>{
@@ -93,14 +94,28 @@ export default class Maakmoestuin extends Component{
 
     selectAllMinFilter(searchParams)
     .then(response=>{
-      let users = filter(response, o => o.id !== this.state.user.user.id);
+      let usersWithoutAdmin = [];
 
+      usersWithoutAdmin = filter(response, o => parseInt(o.id) !== this.state.eigenaar);
 
+      if (!isEmpty(this.state.eigenaars)){
+        this.setState({dummyEigenaars: this.state.eigenaars});
+      }else{
+        let dummyEigenaar = [];
+        dummyEigenaar.push(token.content().user);
+        this.setState({dummyEigenaars: dummyEigenaar});
+      }
 
-      //logica toevoegen voor inserted users
-
-
-      this.setState({users, usersFetched: true});
+      for (let i = 0; i< usersWithoutAdmin.length; i++) {
+        for (let j = 0; j< this.state.dummyEigenaars.length; j++) {
+          if(usersWithoutAdmin[i].id === this.state.dummyEigenaars[j].id){
+            usersWithoutAdmin.splice(i, 1);
+            this.setState({users: usersWithoutAdmin, usersFetched: true});
+          }else{
+            this.setState({users: usersWithoutAdmin, usersFetched: true});
+          }
+        }
+      }
     });
   }
 
@@ -129,7 +144,6 @@ export default class Maakmoestuin extends Component{
 
   onSubmitHandler(e){
     e.preventDefault();
-    //console.log('submit form');
 
     let errors = this.validate();
 
@@ -145,7 +159,6 @@ export default class Maakmoestuin extends Component{
         if(!isEmpty(this.state.eigenaars)){
           this.insertMoestuinUsers();
         }else{
-
           this.context.router.push(`/moestuin/${this.state.moestuinId}`);
         }
       })
@@ -162,7 +175,6 @@ export default class Maakmoestuin extends Component{
     let {eigenaars} = this.state;
     let eigenaarsArray = [];
     eigenaars.map(eigenaar => eigenaarsArray.push(eigenaar.id));
-
 
     let data = {
       'users': eigenaarsArray,
@@ -186,10 +198,9 @@ export default class Maakmoestuin extends Component{
     insertPercelen(data);
   }
 
-
   pushEigenaar(user){
     let {eigenaars} = this.state;
-    console.log(user);
+
     eigenaars.push(user);
     this.setState({eigenaars});
   }

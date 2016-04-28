@@ -20,11 +20,12 @@ export default class App extends React.Component {
   renderAccount(){
     if(token.isValid()){
       let {user} = token.content();
+
       return (
         <section className="account">
           <div>
             <h2 className="avatar">
-              <img width="50" height="50" className="avatarimage" src={`${basename}/assets/img/twitter.jpg`} alt={`${user.voornaam} ${user.achternaam}`} />
+              <img width="50" height="50" className="avatarimage" src={`${basename}/assets/img/${user.foto}`} alt={`${user.voornaam} ${user.achternaam}`} />
               <span>{`${user.voornaam} ${user.achternaam}`}</span>
             </h2>
           </div>

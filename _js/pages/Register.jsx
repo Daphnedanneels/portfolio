@@ -94,7 +94,7 @@ export default class Register extends Component{
   render(){
     let {voornaam, achternaam, email, wachtwoord, errors={}} = this.state;
 
-    console.log(errors.error)
+    console.log(errors.error);
 
     return (
       <div>

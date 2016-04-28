@@ -22,7 +22,7 @@ export const deleteMoestuinUsers = data => {
   let body = buildBody(data, ['user_id', 'moestuin_id']);
   let headers = new Headers({'Content-Type': 'application/json'});
 
-  return fetch(`${basename}/api/moestuinusers?user_id=${data['user_id']}&moestuin_id=${data['moestuin_id']}`, {method, body, headers})
+  return fetch(`${basename}/api/moestuinusers?user_id=${data.user_id}&moestuin_id=${data.moestuin_id}`, {method, body, headers})
     .then(checkStatus);
 };
 

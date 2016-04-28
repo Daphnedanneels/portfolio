@@ -31,6 +31,16 @@ export const updatePercelen = data =>{
 
 };
 
+export const updateWater = data =>{
+
+  let method = 'PUT';
+  let body = buildBody(data, ['perceel_id', 'action', 'timestamp']);
+  let headers = new Headers({'Content-Type': 'application/json'});
+
+  return fetch(`${basename}/api/percelen`, {method, body, headers})
+    .then(checkStatus);
+};
+
 export default {
   getPercelenByMoestuin,
   insertPercelen,

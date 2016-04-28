@@ -5,12 +5,12 @@ import {basename} from '../globals';
 import {isEmpty} from 'lodash';
 import token from '../auth/token';
 
-export default class ComponentName extends Component{
+export default class MedeEigenaars extends Component{
 
   constructor(props, context){
     super(props, context);
     this.state ={
-      adminMoestuin :'',
+      adminMoestuin: '',
       adminMoestuinSet: false,
       user: ''
     };
@@ -18,12 +18,12 @@ export default class ComponentName extends Component{
 
   componentDidMount(){
 
-    if (!isEmpty(this.props.moestuin) && this.props.id == this.props.moestuin.eigenaar){
+    if (!isEmpty(this.props.moestuin) && this.props.id === this.props.moestuin.eigenaar){
       this.setState({adminMoestuin: this.props.id});
       this.setState({adminMoestuinSet: true});
     }
 
-    if (this.props.id == token.content().user.id){
+    if (this.props.id === token.content().user.id){
       this.setState({user: this.props.id});
     }
 
@@ -35,40 +35,33 @@ export default class ComponentName extends Component{
   }
 
   renderRemoveButton(){
-    if (!this.state.adminMoestuinSet && this.props.id != token.content().user.id){
-      return <a className="removeuser" href="#" onClick={(e)=> this.clickHandler(e)}><span>-</span></a>
+    if (!this.state.adminMoestuinSet && this.props.id !== token.content().user.id){
+      return <a className="removeuser" href="#" onClick={(e)=> this.clickHandler(e)}><span>-</span></a>;
     }
   }
 
   renderStatus(){
-    if(!isEmpty(this.props.moestuin) && this.props.id == this.props.moestuin.eigenaar){
-      return <p className="statusBlok blauw">Admin</p>
+    if(!isEmpty(this.props.moestuin) && this.props.id === this.props.moestuin.eigenaar){
+      return <p className="adminIcon"></p>;
     }
-
-    if (this.props.id == token.content().user.id){
-      return <p className="statusBlok groen">Jij</p>
-    }
-
-    return
-
   }
 
   render(){
 
     let {voornaam, achternaam, foto} = this.props;
     let {adminMoestuin, adminMoestuinSet, user} = this.state;
-    let name = "";
+    let name = '';
 
     if (adminMoestuinSet){
       if (adminMoestuin){
-        name = "admin order";
+        name = 'admin order';
       }else{
-        name = "";
+        name = '';
       }
     }
 
     if (user){
-      name ="user order2"
+      name ='user order2';
     }
 
     return (
