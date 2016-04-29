@@ -120,7 +120,7 @@ class MoestuinDAO extends DAO {
             AND `eigenaar` = :user_id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':hash', $hash);
-    $stmt->bindValue(':eigenaar', $userId);
+    $stmt->bindValue(':user_id', $userId);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }

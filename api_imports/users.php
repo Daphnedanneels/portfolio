@@ -97,7 +97,6 @@ $app->post($base, function($request, $response, $args){
     //originele file niet via ImageResize->save want
     //indien je met een gif werkt, ben je de animatie kwijt
 
-
     $user['foto'] = $foto;
     $user['hash'] = $hash;
 

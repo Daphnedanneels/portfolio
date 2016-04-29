@@ -132,7 +132,7 @@ $app->post('/api/moestuinen', function($request, $response, $args){
 
   if(!empty($existing)) {
 
-    if($moestuinDAO->selectByHashAndUserId($hash, $token->getUser()->id)) {
+    if($moestuinDAO->selectByHashAndUserId($hash, $moestuinen['eigenaar'])){
 
       $errors = array();
       $errors[] = 'You already uploaded this file!';
@@ -152,7 +152,7 @@ $app->post('/api/moestuinen', function($request, $response, $args){
 
     //ImageResize(waar de image nu staat)
     $image = new ImageResize($file['tmp_name']);
-    $image->crop(250, 250);
+    $image->crop(250, 150);
     $image->save(WWW_ROOT . DS . $foto);
 
     //originele file niet via ImageResize->save want
