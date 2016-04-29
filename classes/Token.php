@@ -49,6 +49,10 @@ class Token {
     return $role == 1;
   }
 
+  public function getUser() {
+    return $this->token->getClaim('user');
+  }
+
   public function hasSameUserId($userId) {
     $id = intval($this->token->getClaim('user')->id);
     //returned true als onderstaand juist is

@@ -36,6 +36,7 @@ export default class Maakmoestuin extends Component{
       errors: '',
       moestuinId: '',
       grid: '',
+      foto: '',
       dummyEigenaars: ''
     };
 
@@ -70,12 +71,18 @@ export default class Maakmoestuin extends Component{
 
   validate(){
 
-    let {naam, rijen, kolommen} = this.state;
+    let {naam, rijen, kolommen, foto} = this.state;
 
     let errors = {};
 
+    console.log(foto);
+
     if(!naam){
       errors.naam = 'Je bent je naam vergeten.';
+    }
+
+    if(!foto){
+      errors.foto = 'Je bent je foto vergeten.';
     }
 
     if(!rijen){
@@ -134,12 +141,13 @@ export default class Maakmoestuin extends Component{
   }
 
   onchangeHandler(){
-    let {naam, rijen, kolommen} = this.refs;
+    let {naam, rijen, kolommen, foto} = this.refs;
 
     this.setState({
       naam: naam.value,
       rijen: parseInt(rijen.value),
-      kolommen: parseInt(kolommen.value)
+      kolommen: parseInt(kolommen.value),
+      foto: foto.files[0]
     });
     this.renderMoestuin();
   }
@@ -262,7 +270,7 @@ export default class Maakmoestuin extends Component{
               <header className="moestuinenheader">
                 <h2>Maak je eigen moestuin</h2>
               </header>
-               <form className="maakmoestuinform" action="#" autoComplete="off" onSubmit={(e)=>this.onSubmitHandler(e)}method="POST">
+               <form className="maakmoestuinform" action="#" autoComplete="off" onSubmit={(e)=>this.onSubmitHandler(e)} method="POST">
                 <section className="moestuingegevens">
                   <div className="moestuingegevenswrapper">
                     <div className="moestuingegevenslinks">
@@ -299,7 +307,9 @@ export default class Maakmoestuin extends Component{
                           <p className="tekstUpload">Voeg een foto toe</p>
                           <input className="moestuinfile" type="file"
                                  name="moestuinfile" id="moestuinfile"
-                                 />
+                                 ref="foto" onChange={()=>this.onchangeHandler()}
+                                 accept=".png, .jpg, .jpeg" />
+                                 <p className="error errortop errorfile">{errors.foto}</p>
                         </div>
                     </div>
                   </div>

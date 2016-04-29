@@ -3,7 +3,10 @@
 require WWW_ROOT.'dao'.DS.'PercelenDAO.php';
 require WWW_ROOT.'dao'.DS.'MoestuinDAO.php';
 require WWW_ROOT.'dao'.DS.'MoestuinenUsersDAO.php';
+// require WWW_ROOT.'vendor'.DS.'eventviva'.DS.'php-image-resize'.DS.'src.php';
 
+use PHPassLib\Hash\BCrypt;
+use Eventviva\ImageResize;
 
 $app->get('/api/moestuinen', function($request, $response, $args){
 
@@ -73,7 +76,6 @@ $app->get('/api/moestuinen/{id}', function($request, $response, $args){
 
 $app->post('/api/moestuinen', function($request, $response, $args){
 
-
   $token = new Token();
   $token->setFromRequest($request);
 
@@ -81,7 +83,6 @@ $app->post('/api/moestuinen', function($request, $response, $args){
     $response = $response->withStatus(401);
     return $response;
   }
-
   $moestuinDAO = new MoestuinDAO();
   $moestuinen = $request->getParsedBody();
 
@@ -94,6 +95,71 @@ $app->post('/api/moestuinen', function($request, $response, $args){
     $response = $response->withStatus(403);
     return $response;
   }
+
+  $errors = array();
+  $errors['errors'] = $moestuinDAO->getValidationErrors($moestuinen);
+
+  if(!empty($errors['errors'])){
+    $response->getBody()->write(
+      json_encode(array('errors' => $errors))
+    );
+    $response = $response->withStatus(400);
+    return $response;
+  }
+
+   $file = $_FILES['foto'];
+
+   $isImage = getimagesize($file['tmp_name']);
+
+   if(!$isImage) {
+    $errors = array();
+    $errors['errors'] = 'File must be an image';
+
+    $response->getBody()->write(
+      json_encode(array('errors' => $errors))
+    );
+    $response = $response->withStatus(400);
+    return $response;
+   }
+
+  $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+  $filename = $token->getUser()->id . '_' . uniqid() . '.' . $ext;
+  $foto = 'uploads' . DS . 'th_' . $filename;
+  $hash = md5_file($file['tmp_name']);
+
+  $existing = $moestuinDAO->selectByHash($hash);
+
+  if(!empty($existing)) {
+
+    if($moestuinDAO->selectByHashAndUserId($hash, $token->getUser()->id)) {
+
+      $errors = array();
+      $errors[] = 'You already uploaded this file!';
+
+      $response->getBody()->write(
+        json_encode(array('errors' => $errors))
+      );
+      $response = $response->withStatus(400);
+      return $response;
+    }
+
+    $foto = $existing[0]['foto'];
+    $hash = $existing[0]['hash'];
+
+  } else {
+    //image bestaat nog niet
+
+    //ImageResize(waar de image nu staat)
+    $image = new ImageResize($file['tmp_name']);
+    $image->crop(250, 150);
+    $image->save(WWW_ROOT . DS . $foto);
+
+    //originele file niet via ImageResize->save want
+    //indien je met een gif werkt, ben je de animatie kwijt
+  }
+
+  $moestuinen['foto'] = $foto;
+  $moestuinen['hash'] = $hash;
 
   $insertedMoestuin = $moestuinDAO->insertMoestuin($moestuinen);
 

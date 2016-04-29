@@ -1268,3 +1268,12 @@ justify-content: space-between;
   background-repeat: no-repeat;
 
 }
+
+
+.errorfile{
+  z-index:999;
+  position: absolute;
+  bottom:-5rem;
+  height:2rem;
+  width:20rem;
+}

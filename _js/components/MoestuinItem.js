@@ -13,6 +13,7 @@ export default class Moestuinitem extends Component{
   render(){
 
     let {moestuinen_id, naam, foto} = this.props;
+    console.log(foto);
 
     return (
       <li className="moestuinitem">
@@ -20,7 +21,7 @@ export default class Moestuinitem extends Component{
           <div className="blackoverlay">
             <button className="detailbutton" type=""></button>
           </div>
-          <img width="250" height="150" src={`${basename}/assets/img/${foto}`} alt={`${naam}`}/>
+          <img width="250" height="150" src={`${basename}/${foto}`} alt={`${naam}`}/>
           <p className="moestuintitel">{naam}</p>
         </Link>
       </li>

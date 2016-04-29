@@ -1,6 +1,9 @@
 {
-    "require": {
-        "slim/slim": "^3.2",
-        "slim/php-view": "^2.1"
-    }
+  "require": {
+    "slim/slim": "^3.0",
+    "slim/php-view": "^2.0",
+    "lcobucci/jwt": "^3.1",
+    "rych/phpass": "3.0.*@beta",
+    "eventviva/php-image-resize": "1.5.*"
+  }
 }

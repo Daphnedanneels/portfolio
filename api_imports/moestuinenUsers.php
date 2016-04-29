@@ -21,7 +21,6 @@ $app->post($base, function($request, $response, $args){
   $moestuinUsersDAO = new MoestuinenUsersDAO();
   $moestuinenUsers = $request->getParsedBody();
 
-
   if(empty($moestuinenUsers['moestuin_id'])){
     $response = $response->withStatus(400);
     return $response;
@@ -116,8 +115,6 @@ $app->delete($base, function($request, $response, $args){
   $response->getBody()->write(json_encode(true));
   return $response->withHeader('Content-Type','application/json');
 });
-
-
 
 
 

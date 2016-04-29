@@ -37,7 +37,6 @@ export default class Home extends Component{
   }
 
   renderTuinen(){
-
     let {moestuinen, moestuinenFetched} = this.state;
 
     if(moestuinenFetched){
@@ -46,7 +45,6 @@ export default class Home extends Component{
   }
 
   render(){
-
 
 
     return (

@@ -30,12 +30,14 @@ class MoestuinDAO extends DAO {
   public function insertMoestuin($data){
     $errors = $this->getValidationErrors($data);
     if(empty($errors)) {
-      $sql = "INSERT INTO `mst_moestuinen` (`naam`, `rijen`, `kolommen`, `eigenaar`) VALUES (:naam, :rijen, :kolommen, :eigenaar)";
+      $sql = "INSERT INTO `mst_moestuinen` (`naam`, `rijen`, `kolommen`, `eigenaar`, `foto`, `hash`) VALUES (:naam, :rijen, :kolommen, :eigenaar, :foto, :hash)";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':naam', $data['naam']);
       $stmt->bindValue(':rijen', $data['rijen']);
       $stmt->bindValue(':kolommen', $data['kolommen']);
       $stmt->bindValue(':eigenaar', $data['eigenaar']);
+      $stmt->bindValue(':foto', $data['foto']);
+      $stmt->bindValue(':hash', $data['hash']);
       if($stmt->execute()){
         $insertedId = $this->pdo->lastInsertId();
         return $this->selectMoestuinenById($insertedId);
@@ -101,10 +103,37 @@ class MoestuinDAO extends DAO {
   }
   */
 
+  public function selectByHash($hash) {
+    $sql = "SELECT *
+            FROM `mst_moestuinen`
+            WHERE `hash` = :hash";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':hash', $hash);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function selectByHashAndUserId($hash, $userId) {
+    $sql = "SELECT *
+            FROM `mst_moestuinen`
+            WHERE `hash` = :hash
+            AND `eigenaar` = :user_id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':hash', $hash);
+    $stmt->bindValue(':eigenaar', $userId);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+
   public function getValidationErrors($data) {
     $errors = array();
     if(empty($data['naam'])) {
       $errors['naam'] = 'Je bent je naam vergeten';
+    }
+
+    if(empty($_FILES['foto'])) {
+      $errors['file'] = 'Je hebt je foto vergeten';
     }
     if(empty($data['rijen'])) {
       $errors['rijen'] = 'Je bent je rijen vergeten';

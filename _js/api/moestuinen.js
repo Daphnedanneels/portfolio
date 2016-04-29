@@ -2,7 +2,7 @@
 
 import {basename} from '../globals';
 import fetch from 'isomorphic-fetch';
-import {checkStatus, buildBody} from '../util';
+import {checkStatus, buildBodyBackup} from '../util';
 import token from '../auth/token';
 
 export const getMoestuinByUser = userId => {
@@ -21,8 +21,8 @@ export const getMoestuinDetail = (id) => {
 export const insertMoestuin = data => {
 
   let method = 'POST';
-  let body = buildBody(data, ['naam', 'rijen', 'kolommen', 'eigenaar']);
-  let headers = new Headers({'Content-Type': 'application/json', 'x-auth-token': token.get()});
+  let body = buildBodyBackup(data, ['naam', 'rijen', 'kolommen', 'eigenaar', 'foto']);
+  let headers = new Headers({'x-auth-token': token.get()});
 
   return fetch(`${basename}/api/moestuinen`, {method, body, headers})
     .then(checkStatus);
