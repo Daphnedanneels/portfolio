@@ -69,7 +69,7 @@ export default class MedeEigenaars extends Component{
         {this.renderStatus()}
         {this.renderRemoveButton()}
         <figure>
-          <img src={`${basename}/assets/img/${foto}`} width="100" height="100" alt={`${voornaam} ${achternaam}`}/>
+          <img src={`${basename}/${foto}`} width="100" height="100" alt={`${voornaam} ${achternaam}`}/>
           <figcaption>{voornaam}</figcaption>
         </figure>
       </li>

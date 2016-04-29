@@ -10,7 +10,7 @@ export default class UserItem extends Component{
   }
 
   onClickHandler(props){
-    console.log(props);
+
 
     if (this.props.insertOnClick){
       this.props.pushEigenaarIntoUsers(props);
@@ -23,8 +23,6 @@ export default class UserItem extends Component{
 
     let {voornaam, achternaam, foto, id} = this.props;
 
-    // console.log(this.props);
-
     return (
       <li className="userinlijst">
         <input type="radio" name="user"
@@ -32,7 +30,7 @@ export default class UserItem extends Component{
         ref="medeeigenaar" value={id}
         />
         <label for={id} onClick={()=>this.onClickHandler(this.props)}>
-          <img width="50" height="50" src={`${basename}/assets/img/${foto}`} alt={`${voornaam} ${achternaam}`}/>
+          <img width="50" height="50" src={`${basename}/${foto}`} alt={`${voornaam} ${achternaam}`}/>
           <span className="labelnaam">{`${voornaam} ${achternaam}`}</span>
         </label>
       </li>

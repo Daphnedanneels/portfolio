@@ -29,7 +29,6 @@ export const updatePercelen = data =>{
 
   return fetch(`${basename}/api/percelen`, {method, body, headers})
     .then(checkStatus);
-
 };
 
 export const updateWater = data =>{

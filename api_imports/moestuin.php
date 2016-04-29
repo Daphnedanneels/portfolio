@@ -83,6 +83,7 @@ $app->post('/api/moestuinen', function($request, $response, $args){
     $response = $response->withStatus(401);
     return $response;
   }
+
   $moestuinDAO = new MoestuinDAO();
   $moestuinen = $request->getParsedBody();
 
@@ -151,7 +152,7 @@ $app->post('/api/moestuinen', function($request, $response, $args){
 
     //ImageResize(waar de image nu staat)
     $image = new ImageResize($file['tmp_name']);
-    $image->crop(250, 150);
+    $image->crop(250, 250);
     $image->save(WWW_ROOT . DS . $foto);
 
     //originele file niet via ImageResize->save want

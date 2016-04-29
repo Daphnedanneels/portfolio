@@ -75,7 +75,6 @@ export default class Maakmoestuin extends Component{
 
     let errors = {};
 
-    console.log(foto);
 
     if(!naam){
       errors.naam = 'Je bent je naam vergeten.';
@@ -106,6 +105,7 @@ export default class Maakmoestuin extends Component{
       let usersWithoutAdmin = [];
 
       usersWithoutAdmin = filter(response, o => parseInt(o.id) !== this.state.eigenaar);
+      this.setState({users: usersWithoutAdmin, usersFetched: true});
 
       if (!isEmpty(this.state.eigenaars)){
         this.setState({dummyEigenaars: this.state.eigenaars});
@@ -115,16 +115,12 @@ export default class Maakmoestuin extends Component{
         this.setState({dummyEigenaars: dummyEigenaar});
       }
 
-      for (let i = 0; i< usersWithoutAdmin.length; i++) {
-        for (let j = 0; j< this.state.dummyEigenaars.length; j++) {
-          if(usersWithoutAdmin[i].id === this.state.dummyEigenaars[j].id){
-            usersWithoutAdmin.splice(i, 1);
-            this.setState({users: usersWithoutAdmin, usersFetched: true});
-          }else{
-            this.setState({users: usersWithoutAdmin, usersFetched: true});
-          }
-        }
-      }
+      let newUsers =[];
+
+      this.state.dummyEigenaars.map(dummyEigenaar =>{
+        newUsers = filter(this.state.users, o => o.id !== dummyEigenaar.id);
+        this.setState({users: newUsers, usersFetched: true});
+      });
     });
   }
 
@@ -141,15 +137,39 @@ export default class Maakmoestuin extends Component{
   }
 
   onchangeHandler(){
-    let {naam, rijen, kolommen, foto} = this.refs;
+    let {naam, rijen, kolommen} = this.refs;
 
     this.setState({
       naam: naam.value,
       rijen: parseInt(rijen.value),
-      kolommen: parseInt(kolommen.value),
+      kolommen: parseInt(kolommen.value)
+    });
+
+    this.renderMoestuin();
+  }
+
+  fotoHandler(){
+    let {foto} = this.refs;
+
+    this.setState({
       foto: foto.files[0]
     });
-    this.renderMoestuin();
+
+    let avatarFileUpload = document.querySelector('.fileUpload');
+    let fotoFile;
+
+    if(this.refs.foto.files[0] === undefined){
+      fotoFile = this.state.foto;
+    }else{
+      fotoFile = this.refs.foto.files[0];
+    }
+
+    avatarFileUpload.style.backgroundImage = `url(${URL.createObjectURL(fotoFile)})`;
+    avatarFileUpload.style.backgroundPosition = 'center center';
+    avatarFileUpload.style.backgroundSize = 'cover';
+    avatarFileUpload.style.backgroundColor = 'rgba(0,0,0,0)';
+    let tekstFileUpload = document.querySelector('.tekstUpload');
+    tekstFileUpload.innerHTML = 'Voeg een andere foto toe.';
   }
 
   onSubmitHandler(e){
@@ -307,9 +327,9 @@ export default class Maakmoestuin extends Component{
                           <p className="tekstUpload">Voeg een foto toe</p>
                           <input className="moestuinfile" type="file"
                                  name="moestuinfile" id="moestuinfile"
-                                 ref="foto" onChange={()=>this.onchangeHandler()}
+                                 ref="foto" onChange={()=>this.fotoHandler()}
                                  accept=".png, .jpg, .jpeg" />
-                                 <p className="error errortop errorfile">{errors.foto}</p>
+                           <p className="error errortop errorfile">{errors.foto}</p>
                         </div>
                     </div>
                   </div>
@@ -325,7 +345,7 @@ export default class Maakmoestuin extends Component{
                     <h3 className="eigenaarstitel">Eigenaars</h3>
                     <ul className="eigenaarsoplijsting">
                       <li>
-                        <img src={`${basename}/assets/img/${admin.foto}`} width="100" height="100" alt={`${admin.voornaam} ${admin.achternaam}`} />
+                        <img src={`${basename}/${admin.foto}`} width="100" height="100" alt={`${admin.voornaam} ${admin.achternaam}`} />
                         <p>{admin.voornaam}</p>
                       </li>
                       {this.renderMedeEigenaars()}

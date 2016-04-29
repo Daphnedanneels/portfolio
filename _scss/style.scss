@@ -1266,9 +1266,7 @@ justify-content: space-between;
   background-size: 40%;
   background-position: center center;
   background-repeat: no-repeat;
-
 }
-
 
 .errorfile{
   z-index:999;
@@ -1277,3 +1275,20 @@ justify-content: space-between;
   height:2rem;
   width:20rem;
 }
+
+.moestuinenheader{
+  position:relative;
+  display:flex;
+  align-items: center;
+}
+
+.verlaten{
+  color:$rood;
+  position:absolute;
+  right:0;
+  top:4.3rem;
+  text-decoration: none;
+  border-bottom:2px solid $rood;
+  padding-bottom: 0.7rem;
+}
+

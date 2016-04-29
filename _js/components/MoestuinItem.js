@@ -13,7 +13,6 @@ export default class Moestuinitem extends Component{
   render(){
 
     let {moestuinen_id, naam, foto} = this.props;
-    console.log(foto);
 
     return (
       <li className="moestuinitem">

@@ -21,7 +21,6 @@ export default class AardeDetail extends Component{
       this.props.showInsert(props);
     }
     if (parseInt(status)===1){
-      // console.log("props in aardecomponent1", props);
       this.props.showStatus(props);
     }
   }

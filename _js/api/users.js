@@ -1,7 +1,7 @@
 'use strict';
 
 import fetch from 'isomorphic-fetch';
-import {buildBody, checkStatus} from '../util';
+import {buildBodyBackup, checkStatus} from '../util';
 import {basename} from '../globals';
 import token from '../auth/token';
 
@@ -12,8 +12,8 @@ let base = '/api/users';
 export const insert = data => {
 
   let method = 'POST';
-  let body = buildBody(data, ['voornaam', 'achternaam', 'email', 'wachtwoord']);
-  let headers = new Headers({'Content-Type': 'application/json', 'x-auth-token': token.get()});
+  let body = buildBodyBackup(data, ['voornaam', 'achternaam', 'email', 'wachtwoord', 'foto']);
+  let headers = new Headers({'x-auth-token': token.get()});
 
   return fetch(`${basename}${base}`, {method, body, headers})
     .then(checkStatus);

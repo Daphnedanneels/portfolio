@@ -1529,3 +1529,23 @@ html, body {
   height: 2rem;
   width: 20rem;
 }
+
+.moestuinenheader {
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.verlaten {
+  color: #FF1A00;
+  position: absolute;
+  right: 0;
+  top: 4.3rem;
+  text-decoration: none;
+  border-bottom: 2px solid #FF1A00;
+  padding-bottom: 0.7rem;
+}

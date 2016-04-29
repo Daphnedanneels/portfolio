@@ -3,18 +3,11 @@ import React from 'react';
 import {Link} from 'react-router';
 import {basename} from '../globals';
 import token from '../auth/token';
-// import {checkStatus} from '../util';
-// import fetch from 'isomorphic-fetch';
-// import {find, filter} from 'lodash';
 
 export default class App extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    /*this.state = {
-      oneliners: [],
-      onelinersFetched: false
-    };*/
   }
 
   renderAccount(){
@@ -25,7 +18,7 @@ export default class App extends React.Component {
         <section className="account">
           <div>
             <h2 className="avatar">
-              <img width="50" height="50" className="avatarimage" src={`${basename}/assets/img/${user.foto}`} alt={`${user.voornaam} ${user.achternaam}`} />
+              <img width="50" height="50" className="avatarimage" src={`${basename}/${user.foto}`} alt={`${user.voornaam} ${user.achternaam}`} />
               <span>{`${user.voornaam} ${user.achternaam}`}</span>
             </h2>
           </div>
@@ -33,21 +26,6 @@ export default class App extends React.Component {
         </section>
       );
     }
-  }
-
-  //na render functie
-  componentWillMount(){
-    /*
-    fetch(`${basename}/api/oneliners`)
-   .then(checkStatus)
-   .then(r => r.json())
-   .then(data =>{
-    // console.log(data);
-    this.setState({oneliners: data, onelinersFetched: true});
-   })
-   .catch(()=>{
-    console.log('failed to get cool onliners');
-   });*/
   }
 
   render(){

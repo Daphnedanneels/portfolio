@@ -19,7 +19,6 @@ export default class DetailPerceel extends Component{
 
   waterHandler(e){
     e.preventDefault();
-    console.log(e.currentTarget.dataset.click );
     if (e.currentTarget.dataset.click ==='true'){
       this.props.waterPlant(this.props.selectedPlant);
     }

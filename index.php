@@ -16,7 +16,6 @@ require_once WWW_ROOT.'api_imports/moestuin.php';
 require_once WWW_ROOT.'api_imports/moestuinenUsers.php';
 require_once WWW_ROOT.'api_imports/percelen.php';
 require_once WWW_ROOT.'api_imports/planten.php';
-require_once WWW_ROOT.'api_imports/images.php';
 
 $app->get('/{anything:.*}', function ($request, $response, $args) {
   $view = new \Slim\Views\PhpRenderer('view/');

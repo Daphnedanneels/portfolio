@@ -23,7 +23,7 @@ export default class Register extends Component{
     super(props, context);
 
     this.state={
-      // file:'',
+      foto: '',
       voornaam: '',
       achternaam: '',
       email: '',
@@ -43,14 +43,43 @@ export default class Register extends Component{
   }
 
 
+  fotoHandler(){
+
+    let {foto} = this.refs;
+
+    this.setState({
+      foto: foto.files[0]
+    });
+
+    let avatarFileUpload = document.querySelector('.avatarFileUpload');
+    let fotoFile;
+
+    if (this.refs.foto.files[0] === undefined){
+      fotoFile = this.state.foto;
+    }else{
+      fotoFile = this.refs.foto.files[0];
+    }
+    avatarFileUpload.style.backgroundImage = `url(${URL.createObjectURL(fotoFile)})`;
+    avatarFileUpload.style.backgroundPosition = 'center center';
+    avatarFileUpload.style.backgroundSize = 'cover';
+    avatarFileUpload.style.backgroundColor = 'rgba(0,0,0,0)';
+    let tekstFileUpload = document.querySelector('.tekstFileUpload');
+    tekstFileUpload.innerHTML = 'Voeg een andere foto toe.';
+  }
+
+
   validate(){
 
-    let {voornaam, achternaam, email, wachtwoord} = this.state;
+    let {voornaam, achternaam, email, wachtwoord, foto} = this.state;
 
     let errors={};
 
     if(!voornaam){
       errors.voornaam = 'Je bent je voornaam vergeten.';
+    }
+
+    if(!foto){
+      errors.foto = 'Je bent je foto vergeten.';
     }
 
     if(!achternaam){
@@ -68,8 +97,6 @@ export default class Register extends Component{
     return errors;
   }
 
-
-
   submitHandler(e){
     e.preventDefault();
 
@@ -83,7 +110,6 @@ export default class Register extends Component{
         this.context.router.push('/maakmoestuin');
       })
       .catch(phpErrors =>{
-        console.log(phpErrors);
         this.setState({errors: phpErrors, wachtwoord: ''});
       });
     }else{
@@ -93,8 +119,6 @@ export default class Register extends Component{
 
   render(){
     let {voornaam, achternaam, email, wachtwoord, errors={}} = this.state;
-
-    console.log(errors.error);
 
     return (
       <div>
@@ -115,7 +139,10 @@ export default class Register extends Component{
             <div className="avatarFileUpload">
               <p className="plusFileUpload">+</p>
               <p className="tekstFileUpload">Upload een profielfoto</p>
-              <input className="avatarFile" type="file" name="avatarFile" id="avatarFile"/>
+              <input className="avatarFile" type="file"
+              name="avatarFile" id="avatarFile" ref="foto" onChange={()=>this.fotoHandler()}
+              accept=".png, .jpg, .jpeg"/>
+              <p className="error errortop">{errors.foto}</p>
             </div>
             <section className="persoonlijkeGegevens">
               <h3>Persoonlijke gegevens</h3>

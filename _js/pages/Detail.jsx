@@ -26,6 +26,7 @@ export default class Detail extends Component{
 
   constructor(props, context){
     super(props, context);
+
     this.state = {
       moestuin: '',
       moestuinDetailFetched: false,
@@ -58,6 +59,7 @@ export default class Detail extends Component{
   }
 
   fetchMoestuin(){
+
     getMoestuinDetail(this.props.params.id)
     .then(moestuin =>{
       this.setState({moestuin, moestuinenFetched: true});
@@ -74,7 +76,6 @@ export default class Detail extends Component{
     });
   }
 
-
   fetchAllUsers(search){
 
     let searchParams = {};
@@ -82,33 +83,23 @@ export default class Detail extends Component{
 
     selectAllMinFilter(searchParams)
     .then(response=>{
-      // console.log("response",response);
 
       let usersWithoutAdmin = [];
       if (!isEmpty(response)){
         usersWithoutAdmin = filter(response, o => o.id !== this.state.admin.user.id);
-        // this.setState({allUsers: usersWithoutAdmin});
+        this.setState({allUsers: usersWithoutAdmin, allUsersFetched: true});
 
-        for (let i = 0; i< usersWithoutAdmin.length; i++) {
-          for (let j = 0; j< this.state.users.length; j++) {
-            if(usersWithoutAdmin[i].id === this.state.users[j].id){
-              usersWithoutAdmin.splice(i, 1);
-              this.setState({allUsers: usersWithoutAdmin});
-            }
-          }
-        }
-
-
-
+        let newUsers= [];
+        this.state.users.map(user =>{
+          newUsers = filter(this.state.allUsers, o => o.id !== user.id);
+          this.setState({allUsers: newUsers, allUsersFetched: true});
+        });
       }
-
-      this.setState({allUsers: usersWithoutAdmin, allUsersFetched: true});
     })
     .catch(phpErrors =>{
       this.setState({errors: phpErrors});
     });
   }
-
 
   fetchUsers(){
     //hier wil ik alle users bij de moestuin ophalen
@@ -328,6 +319,30 @@ export default class Detail extends Component{
   }
 
 
+  checkVerlaat(){
+    if (this.state.moestuin.eigenaar !== this.state.admin.user.id){
+      return <Link className="verlaten" onClick={(e)=>this.verlatenHandler(e)} to="">Verlaat deze tuin</Link>;
+    }
+  }
+
+  verlatenHandler(e){
+    e.preventDefault();
+
+    let data = {
+      user_id: this.state.admin.user.id,
+      moestuin_id: this.state.moestuin.id
+    };
+
+    deleteMoestuinUsers(data)
+    .then(()=>{
+      this.context.router.push('/home');
+    })
+    .catch(phpErrors =>{
+      this.setState({ errors: phpErrors});
+    });
+  }
+
+
 
   render(){
 
@@ -357,6 +372,7 @@ export default class Detail extends Component{
           <DetailPerceel closeItem={(e, item)=>this.closeItem(e, item)} waterPlant={(props)=>this.waterPlant(props)} selectedPlant={this.state.selectedPlant} deletePlant={(props) => this.deletePlant(props)}/>
           <header className="moestuinenheader">
             <h2>{naam}</h2>
+            {this.checkVerlaat()}
           </header>
           <div className="mijntuinoverzicht" >
             <section className="tuin" >

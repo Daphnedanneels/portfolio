@@ -31,7 +31,6 @@ export default class Home extends Component{
     })
     .catch(phpErrors =>{
       this.setState({errors: phpErrors, wachtwoord: ''});
-      console.log(this.state.errors);
     });
 
   }

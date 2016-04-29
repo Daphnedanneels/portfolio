@@ -64,13 +64,15 @@ class UserDAO extends DAO {
   public function insert($data) {
     $errors = $this->getValidationErrors($data);
     if(empty($errors)) {
-      $sql = "INSERT INTO `mst_users` (`voornaam`,`achternaam`,`email`, `wachtwoord`)
-              VALUES (:voornaam, :achternaam, :email, :wachtwoord)";
+      $sql = "INSERT INTO `mst_users` (`voornaam`,`achternaam`,`email`, `wachtwoord`, `foto`, `hash`)
+              VALUES (:voornaam, :achternaam, :email, :wachtwoord, :foto, :hash)";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $data['email']);
       $stmt->bindValue(':wachtwoord', $data['wachtwoord']);
       $stmt->bindValue(':voornaam', $data['voornaam']);
       $stmt->bindValue(':achternaam', $data['achternaam']);
+      $stmt->bindValue(':foto', $data['foto']);
+      $stmt->bindValue(':hash', $data['hash']);
       if($stmt->execute()) {
         $insertedId = $this->pdo->lastInsertId();
         return $this->selectById($insertedId);
@@ -79,6 +81,29 @@ class UserDAO extends DAO {
     return false;
   }
 
+  public function selectByHash($hash) {
+    $sql = "SELECT *
+            FROM `mst_moestuinen`
+            WHERE `hash` = :hash";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':hash', $hash);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function selectByHashAndUserId($hash, $userId) {
+    $sql = "SELECT *
+            FROM `mst_moestuinen`
+            WHERE `hash` = :hash
+            AND `eigenaar` = :user_id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':hash', $hash);
+    $stmt->bindValue(':eigenaar', $userId);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+
   public function getValidationErrors($data) {
     $errors = array();
     if(empty($data['email'])) {
@@ -86,6 +111,9 @@ class UserDAO extends DAO {
     }
     if(empty($data['wachtwoord'])) {
       $errors['wachtwoord'] = 'Je bent je wachtwoord vergeten';
+    }
+    if(empty($_FILES['foto'])) {
+      $errors['file'] = 'Je hebt je foto vergeten';
     }
     if(empty($data['voornaam'])) {
       $errors['voornaam'] = 'Je bent je voornaam vergeten';
