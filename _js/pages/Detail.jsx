@@ -68,8 +68,9 @@ export default class Detail extends Component{
     .then(()=>{
       this.fetchUsers();
     })
-    .catch(phpErrors =>{
-      this.setState({ errors: phpErrors});
+    .catch(() =>{
+      this.context.router.push('/home');
+      // this.setState({ errors: phpErrors});
     });
   }
 
@@ -86,19 +87,19 @@ export default class Detail extends Component{
       let usersWithoutAdmin = [];
       if (!isEmpty(response)){
         usersWithoutAdmin = filter(response, o => o.id !== this.state.admin.user.id);
-        this.setState({allUsers: usersWithoutAdmin});
-        // console.log("length",usersWithoutAdmin.length);
-        for (let i = 0; i< usersWithoutAdmin.length; i++) {
+        // this.setState({allUsers: usersWithoutAdmin});
 
+        for (let i = 0; i< usersWithoutAdmin.length; i++) {
           for (let j = 0; j< this.state.users.length; j++) {
-            // console.log(i);
-            // console.log("testrender",i, usersWithoutAdmin[i]);
             if(usersWithoutAdmin[i].id === this.state.users[j].id){
               usersWithoutAdmin.splice(i, 1);
               this.setState({allUsers: usersWithoutAdmin});
             }
           }
         }
+
+
+
       }
 
       this.setState({allUsers: usersWithoutAdmin, allUsersFetched: true});

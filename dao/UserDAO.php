@@ -93,9 +93,7 @@ class UserDAO extends DAO {
      if(empty($data['achternaam'])) {
       $errors['achternaam'] = 'Je bent je achternaam vergeten';
     }
-
     return $errors;
   }
-
 }
 

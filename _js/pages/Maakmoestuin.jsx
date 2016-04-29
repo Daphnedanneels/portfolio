@@ -49,9 +49,11 @@ export default class Maakmoestuin extends Component{
     inputUser.addEventListener('input', ()=>{
       dropdownFormUsers.style.display='block';
       let {search} = this.refs;
+
       this.setState({
         search: search.value
       });
+
       this.getUsers();
     });
 
@@ -260,7 +262,7 @@ export default class Maakmoestuin extends Component{
               <header className="moestuinenheader">
                 <h2>Maak je eigen moestuin</h2>
               </header>
-               <form className="maakmoestuinform" action="#" onSubmit={(e)=>this.onSubmitHandler(e)}method="POST">
+               <form className="maakmoestuinform" action="#" autoComplete="off" onSubmit={(e)=>this.onSubmitHandler(e)}method="POST">
                 <section className="moestuingegevens">
                   <div className="moestuingegevenswrapper">
                     <div className="moestuingegevenslinks">

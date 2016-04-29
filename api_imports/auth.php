@@ -11,16 +11,6 @@ $app->post('/api/auth', function($request, $response, $args){
   $body = $request->getParsedBody();
   $errors = array();
 
-
-  /*DUBBELE EMAIL
-  $userEmail = $userDAO->selectByEmail($body['email']);
-
-  if(!empty($userEmail)){
-    $data = array('sameEmail' => 'Dit e-mailadres is al in gebruik.');
-    $response->getBody()->write(json_encode($data));
-    return $response->withHeader('Content-Type','application/json')->withStatus(400);
-  }*/
-
   if(!empty($body)){
     if(!empty($body['email']) && !empty($body['wachtwoord'])){
 

@@ -9,25 +9,97 @@ $base = '/api/percelen';
 
 $app->get('/api/percelen', function($request, $response, $args){
 
+  $token = new Token();
+  $token->setFromRequest($request);
+
+  if(!$token->verify()){
+    $response = $response->withStatus(401);
+    return $response;
+  }
+
   $percelenDAO = new PercelenDAO();
   $params = $request->getQueryParams();
+
+  if (empty($params)){
+    $response = $response->withStatus(401);
+    return $response;
+  }
+
+  $moestuinDAO = new MoestuinDAO();
+  $moestuin = $moestuinDAO->selectMoestuinenById($params["moestuin_id"]);
+
+  $userDAO = new UserDAO();
+  $users = $userDAO->selectAllUsersByMoestuinId($moestuin['id']);
+
+  $check = array();
+
+  foreach($users as $user){
+    if($token->hasSameUserId($user['id'])){
+    array_push($check, $user['id']);
+    }
+  }
+
+  if (empty($check)){
+    $response = $response->withStatus(403);
+    return $response;
+  }
+
+  if (empty($moestuin)){
+    $response = $response->withStatus(400);
+    return $response;
+  }
+
   $percelen = $percelenDAO->selectPercelenByMoestuinId($params['moestuin_id']);
-
-  // var_dump($params['moestuin_id']);
-
   $response->getBody()->write(json_encode($percelen));
   $response = $response->withHeader('Content-Type','application/json');
   return $response;
 });
 
 
-
 $app->post($base, function($request, $response, $args){
+
+
+  $token = new Token();
+  $token->setFromRequest($request);
+
+  if(!$token->verify()){
+    $response = $response->withStatus(401);
+    return $response;
+  }
 
   $PercelenDAO = new PercelenDAO();
   $data = $request->getParsedBody();
 
-  // var_dump($data);
+  if(empty($data['moestuin_id'])){
+    $response = $response->withStatus(400);
+    return $response;
+  }
+
+
+  $moestuinDAO = new MoestuinDAO();
+  $moestuin = $moestuinDAO->selectMoestuinenById($data["moestuin_id"]);
+
+  if (empty($moestuin)){
+    $response = $response->withStatus(400);
+    return $response;
+  }
+
+  $userDAO = new UserDAO();
+  $users = $userDAO->selectAllUsersByMoestuinId($moestuin['id']);
+
+  $check = array();
+
+  foreach($users as $user){
+    if($token->hasSameUserId($user['id'])){
+    array_push($check, $user['id']);
+    }
+  }
+
+  if (empty($check)){
+    $response = $response->withStatus(403);
+    return $response;
+  }
+
 
   $rijen = $data['rijen'];
   $kolommen = $data['kolommen'];
@@ -54,8 +126,21 @@ $app->post($base, function($request, $response, $args){
 
 $app->put($base, function($request, $response, $args){
 
+  $token = new Token();
+  $token->setFromRequest($request);
+
+  if(!$token->verify()){
+    $response = $response->withStatus(401);
+    return $response;
+  }
+
   $PercelenDAO = new PercelenDAO();
   $data = $request->getParsedBody();
+
+  if(empty($data)){
+    $response = $response->withStatus(400);
+    return $response;
+  }
 
   if ($data['action'] === "insert"){
     $updatedPerceel = $PercelenDAO->insertPlantBijPerceel($data);

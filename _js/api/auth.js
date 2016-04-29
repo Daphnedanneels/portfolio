@@ -15,3 +15,4 @@ export const login = data => {
     .then(checkStatus)
     .then(({token}) => token);
 };
+

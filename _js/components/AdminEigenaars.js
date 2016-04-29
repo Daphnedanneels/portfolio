@@ -68,9 +68,9 @@ export default class AdminEigenaars extends Component{
         <div className="addeigenaar">
           <label for="eigenaaremail">Naam mede-eigenaar</label>
           <div className="addEigenaarAction">
-          <input type="text" name="eigenaaremail" autocomplete="off" id="eigenaaremail"
+          <input type="text" name="eigenaaremail" autoComplete="off" id="eigenaaremail"
                  onClick={()=>this.showUsers()} placeholder="John Doe"
-                 ref="search" value={search}/>
+                 ref="search" value={search} />
           <form className="dropdownformUsers" action="#" method="POST">
             <div className="dropdown">
               <ul className="userlijst">
