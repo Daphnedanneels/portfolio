@@ -1,5 +1,5 @@
 'use strict';
 
-export users from './users';
-export auth from './auth';
-export moestuinen from './moestuinen';
+export web from './web';
+export graphic from './graphic';
+export motion from './motion';

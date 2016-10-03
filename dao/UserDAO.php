@@ -91,17 +91,7 @@ class UserDAO extends DAO {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function selectByHashAndUserId($hash, $userId) {
-    $sql = "SELECT *
-            FROM `mst_moestuinen`
-            WHERE `hash` = :hash
-            AND `eigenaar` = :user_id";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindValue(':hash', $hash);
-    $stmt->bindValue(':eigenaar', $userId);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-  }
+
 
 
   public function getValidationErrors($data) {
