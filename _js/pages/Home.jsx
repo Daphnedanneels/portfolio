@@ -164,7 +164,7 @@ export default class Home extends Component{
             </div>
           </nav>
         </div>
-        <div className="social-media">
+        <div className={`social-media ${anim}`}>
           <a href="https://www.facebook.com/daphne.danneels" target='_blank'><div className="facebook"></div></a>
           <a href="https://www.behance.net/DaphneDanneels"><div className="behance"></div></a>
           <a href="https://www.behance.net/DaphneDanneels"><div className="instagram"></div></a>

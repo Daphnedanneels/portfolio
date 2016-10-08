@@ -5,19 +5,19 @@
       WebFontConfig = {
         custom: {
           families: ['Adam'],
-          urls: ['/assets/fonts/adam.css']
+          urls: ['<?php echo $basePath;?>/assets/fonts/adam.css']
         }
       };
 
       (function() {
         var wf = document.createElement('script');
-        wf.src = '/js/vendor/webfontloader.min.js';
+        wf.src = '<?php echo $basePath;?>/js/vendor/webfontloader.min.js';
         wf.type = 'text/javascript';
         wf.async = 'true';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(wf, s);
       })();
-  </script>
+    </script>
     <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="author" content="Daphné Danneels" />
@@ -25,6 +25,7 @@
     <meta name="keywords" content="portfolio, illustration, layout, graphic, design, devine, cross, media, web, photography, motion, sketch, tattoo, daphne" />
     <title>Daphne Danneels</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href='<?php echo $basePath;?>/assets/favicon/favicon2.png'>
     <link rel="stylesheet" type="text/css" href="<?php echo $basePath;?>/css/style.css"/>
   </head>
   <body class="body">
