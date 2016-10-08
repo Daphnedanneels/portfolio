@@ -22,34 +22,26 @@ export default class Graphic extends Component{
     this.props.backButton();
   }
 
-  imageLoaded(){
-    this.props.imageLoaded();
-    this.setState({thumb: ''});
-  }
-
   render(){
-    let {trigger, thumb} = this.state;
-    let {url, id, title, loader} = this.props;
-    let content, load;
-
-    if(loader){
-      load = <div className="loader"></div>;
-    }
+    let {trigger} = this.state;
+    let {url, id} = this.props;
+    let content;
 
     if(trigger){
       content = (<div className="fullscreen web">
-        <div className="corner-logo" onClick={() => this.backToMain()}>
-          <button className="back-button">BACK</button>
-        </div>
-        <div className="full-container">
-          <div className="previousButton" onClick={() => this.props.previousProject()}></div>
+          <div className="corner-logo" onClick={() => this.backToMain()}>
+            <img src={`${basename}/assets/img/logo.png`} alt=""/>
+            <button>BACK</button>
+          </div>
+          <div className="previousButton desktop" onClick={() => this.props.previousProject()}></div>
           <div className="tv">
             <img src={`${basename}/assets/img/tv.png`} />
-            <iframe src={url} width="747" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            {load}
+            <iframe src={url} key={id} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
           </div>
-          <div className="nextButton" onClick={() => this.props.nextProject()}></div>
-        </div>
+          <div>
+            <div className="previousButton tablet" onClick={() => this.props.previousProject()}></div>
+            <div className="nextButton" onClick={() => this.props.nextProject()}></div>
+          </div>
       </div>);
     }
 

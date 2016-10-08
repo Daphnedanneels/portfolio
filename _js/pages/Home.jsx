@@ -4,9 +4,7 @@ import React, {Component} from 'react';
 import {basename} from '../globals';
 import {Graphic, Web, Motion, About} from '../components';
 
-import {web, graphic, motion} from '../api';
-
-// import {Link} from 'react-router';
+import {webAPI, graphicAPI, motionAPI} from '../api';
 
 export default class Home extends Component{
 
@@ -17,7 +15,6 @@ export default class Home extends Component{
       project: 1,
       amount: '',
       direction: '',
-      color: 'black',
       loader: true
     };
   }
@@ -28,19 +25,19 @@ export default class Home extends Component{
 
   getTotalProjects(name){
     if(name === 'web'){
-      web.countProjects()
+      webAPI.countProjects()
         .then(data => {
           this.setState({amount: data.amount});
         });
     }
     if(name === 'graphic'){
-      graphic.countProjects()
+      graphicAPI.countProjects()
         .then(data => {
           this.setState({amount: data.amount});
         });
     }
     if(name === 'motion'){
-      motion.countProjects()
+      motionAPI.countProjects()
         .then(data => {
           this.setState({amount: data.amount});
         });
@@ -51,19 +48,19 @@ export default class Home extends Component{
 
     console.log(project);
     if(name === 'web'){
-      web.selectById(project)
+      webAPI.selectById(project)
         .then(data => {
           this.setState({web: data});
         });
     }
     if(name === 'graphic'){
-      graphic.selectById(project)
+      graphicAPI.selectById(project)
         .then(data => {
           this.setState({graphic: data, loader: true});
         });
     }
     if(name === 'motion'){
-      motion.selectById(project)
+      motionAPI.selectById(project)
         .then(data => {
           this.setState({motion: data, loader: true});
         });
@@ -115,7 +112,6 @@ export default class Home extends Component{
 
   renderComponent(component){
     let {web, graphic, motion, direction, loader} = this.state;
-    console.log(motion);
     if(component === 'graphic'){
       return <Graphic imageLoaded={() => this.imageLoaded()} loader={loader} backButton={() => this.backButton()} nextProject={() => this.nextProject('graphic')} previousProject={() => this.previousProject('graphic')} {...graphic}/>;
     }
@@ -132,32 +128,34 @@ export default class Home extends Component{
 
   render(){
 
-    let {component, color} = this.state;
+    let {component} = this.state;
 
     return (
       <main className={`overlay`}>
-        <header>
-          <img className="logo-big" src={`${basename}/assets/img/logo.png`} alt="logo"/>
-          <h1 className="naam">DAPHNE-O-LOGIC</h1>
-        </header>
-        <nav>
-          <div className="arrow-graphic" onClick={() => this.renderScreenName('graphic', 'blue')}>
-            <img src={`${basename}/assets/img/arrow.png`}/>
-            <span>Graphic Design</span>
-          </div>
-          <div className="arrow-web" ref="web-button" onClick={() => this.renderScreenName('web', 'green')}>
-            <span>Web Design</span>
-            <img src={`${basename}/assets/img/arrow.png`}/>
-          </div>
-          <div className="arrow-motion" onClick={() => this.renderScreenName('motion', 'orange')}>
-            <img src={`${basename}/assets/img/arrow.png`}/>
-            <span>Motion Graphics</span>
-          </div>
-          <div className="arrow-cv" onClick={() => this.renderScreenName('about', 'purple')}>
-            <span>About me</span>
-            <img src={`${basename}/assets/img/arrow.png`}/>
-          </div>
-        </nav>
+        <div className="flex-container mobile-active">
+          <header>
+            <img className="logo-big" src={`${basename}/assets/img/logo.svg`} alt="logo"/>
+            <h1>DAPHNE DANNEELS</h1>
+          </header>
+          <nav>
+            <div className="arrow-graphic" onClick={() => this.renderScreenName('graphic', 'blue')}>
+              <img src={`${basename}/assets/img/arrow.png`}/>
+              <span>Graphic Design</span>
+            </div>
+            <div className="arrow-web" ref="web-button" onClick={() => this.renderScreenName('web', 'green')}>
+              <span>Web Design</span>
+              <img src={`${basename}/assets/img/arrow.png`}/>
+            </div>
+            <div className="arrow-motion" onClick={() => this.renderScreenName('motion', 'orange')}>
+              <img src={`${basename}/assets/img/arrow.png`}/>
+              <span>Motion Graphics</span>
+            </div>
+            <div className="arrow-cv" onClick={() => this.renderScreenName('about', 'purple')}>
+              <span>About me</span>
+              <img src={`${basename}/assets/img/arrow.png`}/>
+            </div>
+          </nav>
+        </div>
         <div className="social-media">
           <a href="https://www.facebook.com/daphne.danneels" target='_blank'><div className="facebook"></div></a>
           <a href="https://www.behance.net/DaphneDanneels"><div className="behance"></div></a>

@@ -10,7 +10,7 @@ const Info = ({animate}) => {
   }
   return (
     <div className='content-wrap'>
-      <p className={`width-constraint ${state}`}>Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p className={`width-constraint ${state}`}>My name is Daphné, a Belgium based graphic designer and developer. My logo is a chameleon because I can transform into anyone you require at the time, from either a graphic designer to an illustrator, motion designer, print expert, frond-ender, back-ender, you name it! I have a wide range of skills and am above all very enthousiastic and eager to learn.</p>
       <div className={`info-line ${state}`}><img src={`${basename}/assets/img/icons/gsm.png`} alt=""/><p>Daphneologic@hotmail.com</p></div>
       <div className={`info-line ${state}`}><img src={`${basename}/assets/img/icons/email.png`} alt=""/><p>+32 477 03 40 17</p></div>
       <div className={`info-line ${state}`}><img src={`${basename}/assets/img/icons/home.png`} alt=""/><p>Ghent, Belgium</p></div>

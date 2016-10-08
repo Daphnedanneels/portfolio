@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <script type="text/javascript">
-    WebFontConfig = {
-      google: { families: [ 'Arvo:400:latin' ] }
-    };
-    (function() {
-      var wf = document.createElement('script');
-      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-      wf.type = 'text/javascript';
-      wf.async = 'true';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(wf, s);
-    })(); </script> -->
+    <script type="text/javascript">
+      WebFontConfig = {
+        custom: {
+          families: ['Adam'],
+          urls: ['/assets/fonts/adam.css']
+        }
+      };
+
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = '/js/vendor/webfontloader.min.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+  </script>
     <meta charset="UTF-8">
     <meta charset="UTF-8">
-    <meta name="author" content="Jonas Devacht" />
-    <meta name="description" content="Moestuinbeheerder is een webpapp om je moestuin te beheren" />
-    <meta name="keywords" content="moestuin, planten, oogsten, kweken, app" />
+    <meta name="author" content="Daphné Danneels" />
+    <meta name="description" content="My personal portfolio" />
+    <meta name="keywords" content="portfolio, illustration, layout, graphic, design, devine, cross, media, web, photography, motion, sketch, tattoo, daphne" />
     <title>Daphne Danneels</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" href="<?php echo $basePath;?>/css/style.css"/>

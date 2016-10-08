@@ -6,3 +6,4 @@ export Me from './Me.js';
 export Code from './Code.js';
 export Degrees from './Degrees.js';
 export Experience from './Experience.js';
+

@@ -9,7 +9,6 @@ export default class Web extends Component{
   constructor(props, context){
     super(props, context);
     this.state = {
-      thumb: '-thumb',
       loader: true
     };
   }
@@ -19,10 +18,8 @@ export default class Web extends Component{
   }
 
   componentDidUpdate(){
-    // if(this.refs.screen){
-      let screen = this.refs.screen;
-      screen.scrollTop = 0;
-    // }
+    let screen = this.refs.screen;
+    screen.scrollTop = 0;
   }
 
   backToMain(){
@@ -31,14 +28,13 @@ export default class Web extends Component{
   }
 
   imageLoaded(){
-    console.log('done');
-    this.setState({thumb: '', loader: false});
+    this.props.imageLoaded();
   }
 
   render(){
-    let {trigger, thumb, loader} = this.state;
-    let {image, id, direction} = this.props;
-    let content, load, url;
+    let {trigger} = this.state;
+    let {image, id, direction, loader} = this.props;
+    let content, load;
 
     if(loader){
       load = <div className="loader"></div>;
@@ -47,11 +43,11 @@ export default class Web extends Component{
 
     if(trigger){
       content = (<div className="fullscreen web">
-        <div className="corner-logo" onClick={() => this.backToMain()}>
-          <button className="back-button" onClick={() => this.backToMain()}>BACK</button>
-        </div>
-        <div className="full-container">
-          <div className="previousButton" onClick={() => this.props.previousProject()}></div>
+          <div className="corner-logo" onClick={() => this.backToMain()}>
+            <img src={`${basename}/assets/img/logo.png`} alt=""/>
+            <button>BACK</button>
+          </div>
+          <div className="previousButton desktop" onClick={() => this.props.previousProject()}></div>
           <div className="macbook">
             <img src={`${basename}/assets/img/macbook.png`} />
             <div className="screen-overlay" ref="screen">
@@ -59,14 +55,14 @@ export default class Web extends Component{
                 transitionEnter = {true} transitionEnterTimeout = {1000}
                 transitionLeave = {true} transitionLeaveTimeout = {1000}>
                 <img key={id} src={`${basename}/assets/img/web/tiny/${image}.jpg`} onLoad={() => this.imageLoaded()} />
-                <img key={image} src={`${basename}/assets/img/web/${image}${thumb}.jpg`}/>
                 {load}
               </ReactCSSTransitionGroup>
             </div>
-            <div className="info-button" onClick={() => this.showInfo()}><span>i</span></div>
           </div>
-          <div className="nextButton" onClick={() => this.props.nextProject()}></div>
-        </div>
+          <div>
+            <div className="previousButton tablet" onClick={() => this.props.previousProject()}></div>
+            <div className="nextButton" onClick={() => this.props.nextProject()}></div>
+          </div>
       </div>);
     }
 

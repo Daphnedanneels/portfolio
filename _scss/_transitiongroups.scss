@@ -1,0 +1,161 @@
+.down-enter {
+   opacity: 0.01;
+   transform: translate(0, -100%);
+}
+
+.down-enter.down-enter-active {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: all 1s ease-in;
+}
+
+.down-leave {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.down-leave.down-leave-active {
+  opacity: 0.01;
+  transform: translate(0, -100%);
+  transition: all 1s ease-in;
+}
+
+.up-enter {
+   opacity: 0.01;
+   transform: translate(0, 100%);
+}
+
+.up-enter.up-enter-active {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: all 1s ease-in;
+}
+
+.up-leave {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.up-leave.up-leave-active {
+  opacity: 0.01;
+  transform: translate(0, 100%);
+  transition: all 1s ease-in;
+}
+
+.left-enter {
+   opacity: 0.01;
+   z-index: 5;
+   transform: translate(100%, 0);
+}
+
+.left-enter.left-enter-active {
+  opacity: 1;
+  z-index: 5;
+  transform: translate(0, 0);
+  transition: all 1s ease;
+}
+
+.left-leave {
+  opacity: 0;
+  z-index: 4;
+  transform: translate(0, 0);
+}
+
+.left-leave.left-leave-active {
+  opacity: 1;
+  z-index: 4;
+  transform: translate(100%, 0);
+  transition: all 1s ease;
+}
+
+.previous-enter {
+   opacity: 0.01;
+   z-index: 5;
+   transform: translate(100%, 0);
+}
+
+.previous-enter.previous-enter-active {
+  opacity: 1;
+  z-index: 5;
+  transform: translate(0, 0);
+  transition: all 1s ease;
+}
+
+.previous-leave {
+  z-index: 4;
+}
+
+.previous-leave.previous-leave-active {
+  z-index: 4;
+  transition: all 1s ease;
+}
+
+.next-enter {
+   opacity: 0.01;
+   z-index: 5;
+   transform: translate(-100%, 0);
+}
+
+.next-enter.next-enter-active {
+  opacity: 1;
+  z-index: 5;
+  transform: translate(0, 0);
+  transition: all 1s ease;
+}
+
+.next-leave {
+  z-index: 4;
+}
+
+.next-leave.next-leave-active {
+  z-index: 4;
+  transition: all 1s ease;
+}
+
+.right-enter {
+   opacity: 0.01;
+   z-index: 5;
+   transform: translate(-100%, 0);
+}
+
+.right-enter.right-enter-active {
+  opacity: 1;
+  z-index: 5;
+  transform: translate(0, 0);
+  transition: all 1s ease;
+}
+
+.right-leave {
+  z-index: 4;
+  transform: translate(0, 0);
+}
+
+.right-leave.right-leave-active {
+  z-index: 4;
+  transform: translate(-100%, 0);
+  transition: all 1s ease;
+}
+
+.blur-enter {
+   filter: blur(5px);
+   position: absolute;
+   z-index: 99;
+   opacity: 0;
+}
+
+.blur-enter.blur-enter-active {
+  filter: blur(0px);
+  opacity: 1;
+  transition: all 0.5s ease-in;
+}
+
+.blur-leave {
+  filter: blur(0px);
+  opacity: 1;
+}
+
+.blur-leave.blur-leave-active {
+  filter: blur(5px);
+  opacity: 0;
+  transition: all 0.5s ease-in;
+}

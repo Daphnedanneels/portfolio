@@ -9,7 +9,7 @@ export default class Graphic extends Component{
   constructor(props, context){
     super(props, context);
     this.state = {
-      thumb: '-thumb'
+
     };
   }
 
@@ -24,11 +24,10 @@ export default class Graphic extends Component{
 
   imageLoaded(){
     this.props.imageLoaded();
-    this.setState({thumb: ''});
   }
 
   render(){
-    let {trigger, thumb} = this.state;
+    let {trigger} = this.state;
     let {image, id, title, description, loader} = this.props;
     let content, load;
 
@@ -36,18 +35,20 @@ export default class Graphic extends Component{
       load = <div className="loader"></div>;
     }
 
-    console.log(loader);
-
 
     if(trigger){
       content = (<div className="fullscreen web">
-        <div className="corner-logo" onClick={() => this.backToMain()}>
-          <button className="back-button" onClick={() => this.backToMain()}>BACK</button>
-        </div>
-        <div className="full-container">
-          <div className="previousButton" onClick={() => this.props.previousProject()}></div>
+          <div className="corner-logo" onClick={() => this.backToMain()}>
+            <img src={`${basename}/assets/img/logo.png`} alt=""/>
+            <button>BACK</button>
+          </div>
+          <div className="previousButton desktop" onClick={() => this.props.previousProject()}></div>
           <div className="round-container">
-            <img className="rounded" key={id} src={`${basename}/assets/img/graphic/tiny/${image}.jpg`} onLoad={() => this.imageLoaded()} />
+            <ReactCSSTransitionGroup transitionName = 'blur'
+              transitionEnter = {true} transitionEnterTimeout = {500}
+              transitionLeave = {true} transitionLeaveTimeout = {500}>
+              <img className="rounded" key={id} src={`${basename}/assets/img/graphic/tiny/${image}.jpg`} onLoad={() => this.imageLoaded()} />
+            </ReactCSSTransitionGroup>
             <div className="hover-info">
               <div className="hover-text">
                 <h2>{title}</h2>
@@ -57,8 +58,10 @@ export default class Graphic extends Component{
             </div>
             {load}
           </div>
-          <div className="nextButton" onClick={() => this.props.nextProject()}></div>
-        </div>
+          <div>
+            <div className="previousButton tablet" onClick={() => this.props.previousProject()}></div>
+            <div className="nextButton" onClick={() => this.props.nextProject()}></div>
+          </div>
       </div>);
     }
 

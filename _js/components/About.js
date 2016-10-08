@@ -30,17 +30,13 @@ export default class About extends Component{
     this.setState({animate: false});
     this.setState({component: name});
     setTimeout(() => {
-      this.setState({animate:true});
+      this.setState({animate: true});
     }, 10);
   }
 
   render(){
-    let {trigger, thumb, loader, component} = this.state;
-    let content, load, sectionComponent, active;
-
-    if(loader){
-      load = <div className="loader"></div>;
-    }
+    let {trigger, component} = this.state;
+    let content, sectionComponent, active;
 
     if(component !== ''){
       active = 'active';
@@ -74,14 +70,13 @@ export default class About extends Component{
 
 
     if(trigger){
-      content = (<div className="fullscreen web">
-        <div className="corner-logo" onClick={() => this.backToMain()}>
-          <button className="back-button" onClick={() => this.backToMain()}>BACK</button>
-        </div>
-        <div className="full-container">
-          <div className="round-container no-overflow">
+      content = (<div className={`fullscreen about ${active}`}>
+          <div className="corner-logo" onClick={() => this.backToMain()}>
+            <img src={`${basename}/assets/img/logo.png`} alt=""/>
+            <button>BACK</button>
+          </div>
+          <div className={`round-container no-overflow ${active}`}>
             <img className="rounded" src={`${basename}/assets/img/daphne.jpg`} alt=""/>
-            <div className="hover-info"></div>
             <div className="about-nav">
               <div className={`info ${(component === 'info') ? 'active' : ''}`} onClick={() => this.callComponent('info')}></div>
               <div className={`skills ${(component === 'skills') ? 'active' : ''}`} onClick={() => this.callComponent('skills')}></div>
@@ -92,10 +87,19 @@ export default class About extends Component{
             </div>
             <div className={`about-container ${active}`}>
               {sectionComponent}
-              {load}
             </div>
           </div>
-        </div>
+          <div className="about-nav-mobile">
+            <div className={`info ${(component === 'info') ? 'active' : ''}`} onClick={() => this.callComponent('info')}></div>
+            <div className={`skills ${(component === 'skills') ? 'active' : ''}`} onClick={() => this.callComponent('skills')}></div>
+            <div className={`me ${(component === 'me') ? 'active' : ''}`} onClick={() => this.callComponent('me')}></div>
+            <div className={`code ${(component === 'code') ? 'active' : ''}`} onClick={() => this.callComponent('code')}></div>
+            <div className={`degrees ${(component === 'degrees') ? 'active' : ''}`} onClick={() => this.callComponent('degrees')}></div>
+            <div className={`experience ${(component === 'experience') ? 'active' : ''}`} onClick={() => this.callComponent('experience')}></div>
+          </div>
+          <div className={`about-container-mobile ${active}`}>
+            {sectionComponent}
+          </div>
       </div>);
     }
 
@@ -108,3 +112,17 @@ export default class About extends Component{
     );
   }
 }
+
+/* <div className="about-nav mobile">
+            <div className={`info ${(component === 'info') ? 'active' : ''}`} onClick={() => this.callComponent('info')}></div>
+            <div className={`skills ${(component === 'skills') ? 'active' : ''}`} onClick={() => this.callComponent('skills')}></div>
+            <div className={`me ${(component === 'me') ? 'active' : ''}`} onClick={() => this.callComponent('me')}></div>
+            <div className={`code ${(component === 'code') ? 'active' : ''}`} onClick={() => this.callComponent('code')}></div>
+            <div className={`degrees ${(component === 'degrees') ? 'active' : ''}`} onClick={() => this.callComponent('degrees')}></div>
+            <div className={`experience ${(component === 'experience') ? 'active' : ''}`} onClick={() => this.callComponent('experience')}></div>
+          </div>
+          <div className={`about-container mobile ${active}`}>
+            {sectionComponent}
+          </div> */
+
+
