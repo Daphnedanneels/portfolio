@@ -12,12 +12,16 @@ export default class About extends Component{
     super(props, context);
     this.state = {
       component: '',
-      animate: false
+      animate: false,
+      animateLogo: 'animate'
     };
   }
 
   componentDidMount(){
     this.setState({trigger: true});
+    setTimeout(() => {
+      this.setState({animateLogo: ''});
+    }, 1000);
   }
 
   backToMain(){
@@ -35,7 +39,7 @@ export default class About extends Component{
   }
 
   render(){
-    let {trigger, component} = this.state;
+    let {trigger, component, animateLogo} = this.state;
     let content, sectionComponent, active;
 
     if(component !== ''){
@@ -71,7 +75,7 @@ export default class About extends Component{
 
     if(trigger){
       content = (<div className={`fullscreen about ${active}`}>
-          <div className="corner-logo" onClick={() => this.backToMain()}>
+          <div className={`corner-logo ${animateLogo}`} onClick={() => this.backToMain()}>
             <img src={`${basename}/assets/img/logo.png`} alt=""/>
             <button>BACK</button>
           </div>

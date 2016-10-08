@@ -97,7 +97,7 @@ export default class Home extends Component{
 
   renderScreenName(name, color){
     this.setState({color});
-    this.setState({component: name});
+    this.setState({component: name, animate: true});
     if(name !== 'about'){
       this.getTotalProjects(name);
       this.getCurrentProject(name, 1);
@@ -105,6 +105,7 @@ export default class Home extends Component{
   }
 
   backButton(){
+    this.setState({animate: false});
     setTimeout(() => {
       this.setState({component: ''});
     }, 1000);
@@ -128,29 +129,36 @@ export default class Home extends Component{
 
   render(){
 
-    let {component} = this.state;
+    let {component, animate} = this.state;
+    let anim;
+
+    if(animate){
+      anim = 'animate-out';
+    }else{
+      anim = 'animate-in';
+    }
 
     return (
       <main className={`overlay`}>
         <div className="flex-container mobile-active">
-          <header>
+          <header className={anim}>
             <img className="logo-big" src={`${basename}/assets/img/logo.svg`} alt="logo"/>
             <h1>DAPHNE DANNEELS</h1>
           </header>
           <nav>
-            <div className="arrow-graphic" onClick={() => this.renderScreenName('graphic', 'blue')}>
+            <div className={`arrow-graphic ${anim}`} onClick={() => this.renderScreenName('graphic', 'blue')}>
               <img src={`${basename}/assets/img/arrow.png`}/>
               <span>Graphic Design</span>
             </div>
-            <div className="arrow-web" ref="web-button" onClick={() => this.renderScreenName('web', 'green')}>
+            <div className={`arrow-web ${anim}`} ref="web-button" onClick={() => this.renderScreenName('web', 'green')}>
               <span>Web Design</span>
               <img src={`${basename}/assets/img/arrow.png`}/>
             </div>
-            <div className="arrow-motion" onClick={() => this.renderScreenName('motion', 'orange')}>
+            <div className={`arrow-motion ${anim}`} onClick={() => this.renderScreenName('motion', 'orange')}>
               <img src={`${basename}/assets/img/arrow.png`}/>
               <span>Motion Graphics</span>
             </div>
-            <div className="arrow-cv" onClick={() => this.renderScreenName('about', 'purple')}>
+            <div className={`arrow-cv ${anim}`} onClick={() => this.renderScreenName('about', 'purple')}>
               <span>About me</span>
               <img src={`${basename}/assets/img/arrow.png`}/>
             </div>

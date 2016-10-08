@@ -289,7 +289,7 @@ header img {
 }
 
 header h1 {
-  font-family: 'adam', 'Helvetica';
+  font-family: 'adam', 'Helvetica', 'Arial';
   font-weight: bolder;
   font-size: 3em;
   color: white;
@@ -352,8 +352,6 @@ nav {
       align-items: center;
   text-align: center;
   overflow: hidden;
-  background: url("/assets/img/palm.jpg") no-repeat center center fixed;
-  background-size: cover;
   position: fixed;
 }
 
@@ -379,6 +377,7 @@ nav {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
+  transform: scale(1);
 }
 
 .corner-logo img {
@@ -404,8 +403,12 @@ nav {
   color: white;
   text-align: center;
   font-size: 1.4em;
-  font-family: 'adam', 'Helvetica';
+  font-family: 'adam', 'Helvetica', 'Arial';
   transition: all 0.5s ease;
+}
+
+.corner-logo.animate {
+  transform: scale(0);
 }
 
 .graphic {
@@ -658,7 +661,7 @@ nav {
   margin-bottom: 30px;
   font-size: 2.8em;
   line-height: 1.4em;
-  font-family: 'adam', 'Helvetica';
+  font-family: 'adam', 'Helvetica', 'Arial';
 }
 
 .hover-text p {
@@ -884,7 +887,7 @@ nav {
 .typography span, .motion span, .photography span, .layout span, .illustration span, .photo-editing span, .web-design span {
   line-height: 0;
   color: black;
-  font-family: 'adam', 'Helvetica';
+  font-family: 'adam', 'Helvetica', 'Arial';
   font-size: 1.2em;
   margin-left: 20px;
   text-transform: uppercase;
@@ -1050,7 +1053,7 @@ nav {
 
 .column {
   margin: 0 10px;
-  font-family: 'adam', 'Helvetica';
+  font-family: 'adam', 'Helvetica', 'Arial';
 }
 
 .column h2 {
@@ -1075,6 +1078,18 @@ nav {
 
 video {
   width: 800px;
+}
+
+.animate-out {
+  transition: all 1s ease-in;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.animate-in {
+  transition: all 1s ease-out;
+  transform: scale(1);
+  opacity: 1;
 }
 
 @media only screen and (max-width: 1040px) {

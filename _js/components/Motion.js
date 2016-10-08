@@ -9,12 +9,15 @@ export default class Graphic extends Component{
   constructor(props, context){
     super(props, context);
     this.state = {
-
+      animate: 'animate'
     };
   }
 
   componentDidMount(){
     this.setState({trigger: true});
+    setTimeout(() => {
+      this.setState({animate: ''});
+    }, 1000);
   }
 
   backToMain(){
@@ -23,13 +26,13 @@ export default class Graphic extends Component{
   }
 
   render(){
-    let {trigger} = this.state;
+    let {trigger, animate} = this.state;
     let {url, id} = this.props;
     let content;
 
     if(trigger){
       content = (<div className="fullscreen web">
-          <div className="corner-logo" onClick={() => this.backToMain()}>
+          <div className={`corner-logo ${animate}`} onClick={() => this.backToMain()}>
             <img src={`${basename}/assets/img/logo.png`} alt=""/>
             <button>BACK</button>
           </div>

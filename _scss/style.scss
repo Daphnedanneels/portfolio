@@ -50,7 +50,7 @@ header {
     margin-bottom: 3%;
   }
   h1 {
-    font-family: 'adam', 'Helvetica';
+    font-family: 'adam', 'Helvetica', 'Arial';
     font-weight: bolder;
     font-size: 3em;
     color: white;
@@ -106,8 +106,8 @@ nav {
   align-items: center;
   text-align: center;
   overflow: hidden;
-  background: url('/assets/img/palm.jpg') no-repeat center center fixed;
-  background-size: cover;
+  // background: url('/assets/img/palm.jpg') no-repeat center center fixed;
+  // background-size: cover;
   position: fixed;
   h1 {
     position: fixed;
@@ -128,6 +128,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transform: scale(1);
   img {
     width: 45%;
     margin: 5% 0;
@@ -148,8 +149,11 @@ nav {
     color: white;
     text-align: center;
     font-size: 1.4em;
-    font-family: 'adam', 'Helvetica';
+    font-family: 'adam', 'Helvetica', 'Arial';
     transition: all 0.5s ease;
+  }
+  &.animate {
+    transform: scale(0);
   }
 }
 
@@ -376,7 +380,7 @@ nav {
     margin-bottom: 30px;
     font-size: 2.8em;
     line-height: 1.4em;
-    font-family: 'adam', 'Helvetica';
+    font-family: 'adam', 'Helvetica', 'Arial';
   }
   p {
     line-height: 1.6em;
@@ -475,29 +479,6 @@ nav {
       box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,1);
     }
 }
-
-
-
-
-
-
-
-
-
-//WEB !!!!
-
-// a.info-button {
-//   width: 30px;
-//   height: 30px;
-//   position: absolute;
-//   left: 50%;
-//   margin-left: -15px;
-//   bottom: 19.5%;
-//   z-index: 101;
-//   cursor: pointer;
-//   background: url('/assets/img/www.png') no-repeat center center;
-//   background-size: 100% 100%;
-// }
 
 .about-nav {
   width: 100%;
@@ -622,7 +603,7 @@ nav {
   span{
     line-height: 0;
     color: black;
-    font-family: 'adam', 'Helvetica';
+    font-family: 'adam', 'Helvetica', 'Arial';
     font-size: 1.2em;
     margin-left: 20px;
     text-transform: uppercase;
@@ -775,7 +756,7 @@ nav {
 
 .column {
   margin: 0 10px;
-  font-family: 'adam', 'Helvetica';
+  font-family: 'adam', 'Helvetica', 'Arial';
   h2{
     text-align: left;
     font-size: 1.6em;
@@ -797,6 +778,18 @@ nav {
 
 video {
   width: 800px;
+}
+
+.animate-out{
+  transition: all 1s ease-in;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.animate-in{
+  transition: all 1s ease-out;
+  transform: scale(1);
+  opacity: 1;
 }
 
 @import 'mqueries';
