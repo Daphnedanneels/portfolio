@@ -24,7 +24,7 @@ main {
   width: 100%;
   height: 100%;
   background-color: black;
-  background: url('/assets/img/palm.jpg') no-repeat center center fixed;
+  background: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/palm.jpg') no-repeat center center fixed;
   background-size: cover;
   position: fixed;
   top: 0;
@@ -84,13 +84,13 @@ nav {
     float: left;
   }
   .facebook{
-    background-image: url('/assets/img/fb.png');
+    background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/fb.png');
   }
   .behance{
-    background-image: url('/assets/img/bh.png');
+    background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/bh.png');
   }
   .instagram{
-    background-image: url('/assets/img/insta.png');
+    background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/insta.png');
   }
 }
 
@@ -106,7 +106,7 @@ nav {
   align-items: center;
   text-align: center;
   overflow: hidden;
-  // background: url('/assets/img/palm.jpg') no-repeat center center fixed;
+  // background: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/palm.jpg') no-repeat center center fixed;
   // background-size: cover;
   position: fixed;
   h1 {
@@ -398,7 +398,7 @@ nav {
 .previousButton, .nextButton {
   width: 70px;
   height: 70px;
-  background-image: url('/assets/img/arrow.png');
+  background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/arrow.png');
   background-repeat: no-repeat;
   background-size: 60% 40%;
   background-position: center center;
@@ -519,42 +519,42 @@ nav {
   top: 0;
   left: 50%;
   margin-top: -35px;
-  background-image: url('/assets/img/icons/info.png');
+  background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/icons/info.png');
 }
 
 .skills {
   top: 25%;
   left: 93%;
   margin-top: -35px;
-  background-image: url('/assets/img/icons/skills.png');
+  background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/icons/skills.png');
 }
 
 .me {
   top: 75%;
   left: 93%;
   margin-top: -35px;
-  background-image: url('/assets/img/icons/me.png');
+  background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/icons/me.png');
 }
 
 .code {
   bottom: 0;
   left: 50%;
   margin-bottom: -35px;
-  background-image: url('/assets/img/icons/code.png');
+  background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/icons/code.png');
 }
 
 .degrees {
   top: 75%;
   left: 6%;
   margin-top: -35px;
-  background-image: url('/assets/img/icons/degree.png');
+  background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/icons/degree.png');
 }
 
 .experience {
   top: 25%;
   left: 6%;
   margin-top: -35px;
-  background-image: url('/assets/img/icons/exp.png');
+  background-image: url('http://student.howest.be/daphne.danneels/20152016/PORTFOLIO/assets/img/icons/exp.png');
 }
 
 .about-container {
